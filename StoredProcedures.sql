@@ -1,25 +1,50 @@
 USE `ats`;
-DROP procedure IF EXISTS `Employee_Insert`;
+DROP PROCEDURE IF EXISTS `Employee_Insert`;
 
 DELIMITER $$
 USE `ats`$$
 CREATE PROCEDURE `Employee_Insert` (
-	IN EmployeeID INT,
+	IN ID INT,
 	IN FirstName VARCHAR(20),
     IN LastName VARCHAR(30),
     IN SIN INT,
     IN HourlyRate DECIMAL,
-    IN isDeleted TINYINT(1),
+    IN isDeleted BOOLEAN,
     IN CreatedAt DATETIME,
     IN UpdatedAt DATETIME,
     IN DeletedAt DATETIME
-    
 )
+BEGIN
+	INSERT INTO `employees`
+		(
+			`ID`,
+            `FirstName`,
+            `LastName`,
+            `SIN`,
+            `HourlyRate`,
+            `isDeleted`,
+            `CreatedAt`,
+            `UpdatedAt`,
+            `DeletedAt`
+        )
+	VALUES
+		(
+			ID,
+            FirstName,
+            LastName,
+            SIN,
+            HourlyRate,
+            isDeleted,
+            CreatedAt,
+            UpdatedAt,
+            DeletedAt
+        );
+END$$
 
 DELIMITER ;
 
 USE `ats`;
-DROP procedure IF EXISTS `Task_Insert`;
+DROP PROCEDURE IF EXISTS `Task_Insert`;
 
 DELIMITER $$
 USE `ats`$$
@@ -39,17 +64,17 @@ END$$
 DELIMITER ;
 
 USE `ats`;
-DROP procedure IF EXISTS `Team_Insert`;
+DROP PROCEDURE IF EXISTS `Team_Insert`;
 
 DELIMITER $$
 USE `ats`$$
 CREATE PROCEDURE `Team_Insert` (
 IN TeamID INT,
 IN Name VARCHAR(50),
-IN IsOnCall TINYINT(1),
+IN IsOnCall BOOLEAN,
 IN CreatedAt DATETIME,
 IN UpdatedAt DATETIME,
-IN isDeleted TINYINT(1),
+IN isDeleted BOOLEAN,
 IN DeletedAt Datetime
 )
 BEGIN
@@ -64,7 +89,7 @@ END$$
 DELIMITER ;
 
 USE `ats`;
-DROP procedure IF EXISTS `Employee_GetByID`;
+DROP PROCEDURE IF EXISTS `Employee_GetByID`;
 
 DELIMITER $$
 USE `ats`$$
