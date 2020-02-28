@@ -1,39 +1,36 @@
-DROP SCHEMA IF EXISTS ats;
+DROP DATABASE IF EXISTS `ats`;
 
-CREATE SCHEMA ats;
+CREATE DATABASE ats;
 
-CREATE TABLE `ats`.`employeesemployees` (
+CREATE TABLE `ats`.`employees` (
   `ID` INT NOT NULL,
   `FirstName` VARCHAR(20) NOT NULL,
   `LastName` VARCHAR(30) NOT NULL,
   `SIN` INT NOT NULL,
   `HourlyRate` DECIMAL(19,2) NOT NULL,
-  `isDeleted` TINYINT(1) NOT NULL,
+  `isDeleted` BOOLEAN NOT NULL,
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NULL,
   `DeletedAt` DATETIME NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
   UNIQUE INDEX `SIN_UNIQUE` (`SIN` ASC));
 
 CREATE TABLE `ats`.`tasks` (
-  `ID` INT(11) NOT NULL,
+  `ID` INT NOT NULL,
   `Name` VARCHAR(50) NOT NULL,
   `Description` VARCHAR(255) NOT NULL,
-  `Duration` INT(11) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC));
+  `Duration` INT NOT NULL,
+  PRIMARY KEY (`ID`));
   
 CREATE TABLE `ats`.`teams` (
-  `ID` INT(11) NOT NULL,
+  `ID` INT NOT NULL,
   `Name` VARCHAR(50) NOT NULL,
-  `IsOnCall` TINYINT(1) NOT NULL,
+  `IsOnCall` BOOLEAN NOT NULL,
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NULL,
-  `IsDeleted` TINYINT(1) NOT NULL,
+  `IsDeleted` BOOLEAN NOT NULL,
   `DeletedAt` DATETIME NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC));
+  PRIMARY KEY (`ID`));
   
 CREATE TABLE `ats`.`jobs` (
   `ID` INT NOT NULL,
@@ -42,65 +39,38 @@ CREATE TABLE `ats`.`jobs` (
   `Cost` DECIMAL(19,2) NOT NULL,
   `Revenue` DECIMAL(19,2) NOT NULL,
   `StartTime` DATETIME NOT NULL,
-  `EndTIme` DATETIME NOT NULL,
+  `EndTime` DATETIME NOT NULL,
+  `TeamID` INT NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
-  CONSTRAINT `ID`
-    FOREIGN KEY (`ID`)
-    REFERENCES `ats`.`teams` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+	FOREIGN KEY (`TeamID`)
+	REFERENCES `ats`.`teams` (`ID`));
     
 CREATE TABLE `ats`.`jobtasks` (
   `TaskID` INT NOT NULL,
   `JobID` INT NOT NULL,
-  UNIQUE INDEX `TaskID_UNIQUE` (`TaskID` ASC),
   PRIMARY KEY (`TaskID`, `JobID`),
-  UNIQUE INDEX `JobID_UNIQUE` (`JobID` ASC),
-  CONSTRAINT `TaskID`
     FOREIGN KEY (`TaskID`)
-    REFERENCES `ats`.`tasks` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `JobID`
+    REFERENCES `ats`.`tasks` (`ID`),
     FOREIGN KEY (`JobID`)
-    REFERENCES `ats`.`jobs` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `ats`.`jobs` (`ID`));
     
 CREATE TABLE `ats`.`employeetasks` (
   `TaskID` INT NOT NULL,
   `EmployeeID` INT NOT NULL,
   PRIMARY KEY (`TaskID`, `EmployeeID`),
-  UNIQUE INDEX `EmployeeID_UNIQUE` (`EmployeeID` ASC),
-  UNIQUE INDEX `TasksID_UNIQUE` (`TaskID` ASC),
-  CONSTRAINT `TasksID`
     FOREIGN KEY (`TaskID`)
-    REFERENCES `ats`.`tasks` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `EmployeeID`
+    REFERENCES `ats`.`tasks` (`ID`),
     FOREIGN KEY (`EmployeeID`)
-    REFERENCES `ats`.`employees` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `ats`.`employees` (`ID`));
     
 CREATE TABLE `ats`.`teammembers` (
   `EmployeeID` INT NOT NULL,
   `TeamID` INT NOT NULL,
   PRIMARY KEY (`EmployeeID`, `TeamID`),
-  UNIQUE INDEX `EmployeeID_UNIQUE` (`EmployeeID` ASC),
-  UNIQUE INDEX `TeamID_UNIQUE` (`TeamID` ASC),
-  CONSTRAINT `EmployeesID`
     FOREIGN KEY (`EmployeeID`)
-    REFERENCES `ats`.`employees` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `TeamID`
+    REFERENCES `ats`.`employees` (`ID`),
     FOREIGN KEY (`TeamID`)
-    REFERENCES `ats`.`teams` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `ats`.`teams` (`ID`));
   
   
   
