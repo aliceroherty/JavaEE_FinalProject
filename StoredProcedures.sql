@@ -94,12 +94,35 @@ DROP PROCEDURE IF EXISTS `Employee_GetByID`;
 DELIMITER $$
 USE `ats`$$
 CREATE PROCEDURE `Employee_GetByID` (
-IN EmployeeID INT
+	IN EmployeeID INT
 )
 BEGIN
 	SELECT * FROM `ats`.`employees` WHERE ID = EmployeeID;
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `Employee_GetAll`;
 
+DELIMITER $$
+CREATE PROCEDURE `Employee_GetAll`()
+BEGIN
+	SELECT * FROM employees;
+END$$
 
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Tasks_GetTasks`;
+
+DELIMITER $$
+CREATE PROCEDURE `Tasks_GetTasks`()
+BEGIN
+	SELECT * FROM tasks;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Tasks_GetTask`;
+
+DELIMITER $$
+CREATE PROCEDURE `Tasks_GetTask`(IN EmployeeID INT)
+BEGIN
+	SELECT * FROM tasks WHERE ID = EmployeeID;
+END$$

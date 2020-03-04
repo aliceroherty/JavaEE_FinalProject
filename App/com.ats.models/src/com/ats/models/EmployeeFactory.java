@@ -1,5 +1,8 @@
 package com.ats.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Employee Factory Class
  * @author Alice Roherty-Carrier
@@ -8,5 +11,9 @@ package com.ats.models;
 public abstract class EmployeeFactory {
     public static IEmployee createInstance() {
         return new Employee();
+    }
+    
+    public static List<IEmployee> createListInstance() {
+        return new ArrayList<>();
     }
 }

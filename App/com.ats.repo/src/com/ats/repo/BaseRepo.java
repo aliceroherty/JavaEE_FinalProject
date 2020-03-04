@@ -51,4 +51,14 @@ public abstract class BaseRepo {
         nValue = rs.getDate(getByColumnLabel(columnName,rs));
         return nValue;
     }
+    
+    protected String getString(String columnName, CachedRowSet rs) throws SQLException {
+        String nValue = "";
+        nValue = rs.getString(getByColumnLabel(columnName, rs));
+        return nValue;
+    }
+    
+    protected boolean getBoolean(String columnName, CachedRowSet rs) throws SQLException {
+        return rs.getBoolean(getByColumnLabel(columnName, rs));
+    }
 }
