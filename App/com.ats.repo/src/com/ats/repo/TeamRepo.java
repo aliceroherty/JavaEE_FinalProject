@@ -12,17 +12,24 @@ import com.ats.dataaccess.ParameterFactory;
 import com.ats.models.ITeam;
 import java.sql.Types;
 import java.util.List;
+
 /**
  * Team Repository Class
  *
- * @author Sam Oakes
+ * @author Samuel Oakes
  * @date 03-04-2020
  */
 public class TeamRepo extends BaseRepo implements ITeamRepo {
 
     private IDAL db = DALFactory.createInstance();
 
-    @Override 
+    /**
+     * Creates a team.
+     *
+     * @param team The Team to be created.
+     * @return The number of rows affected.
+     */
+    @Override
     public int insertTeam(ITeam team) {
         List<IParameter> params = ParameterFactory.createListInstance();
 
@@ -44,9 +51,9 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         IParameter deletedAt = ParameterFactory.createInstance(team.getDeletedAt(), IParameter.Direction.IN, Types.DATE);
         params.add(deletedAt);
 
-        return (int) db.executeNonQuery("Employee_Insert", params).get(0);
+        return (int) db.executeNonQuery("Team_Insert", params).get(0);
     }
-    
+
     @Override
     public int updateTeam(ITeam team) {
         return 0;
