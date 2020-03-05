@@ -1,0 +1,47 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/com.ats.webapplication/assets/images/background.svg");
+    height: 100vh;
+}
+
+nav img {
+    width: 30%;
+}
+
+nav {
+    background-color: #43DDE6;
+}
+
+nav .nav-link {
+    font-size: 1.25em;
+    font-weight: 500;
+    color: #364F6B;
+}
+
+h1 {
+    color: #F0F0F0;
+    text-align: center;
+}
+
+form {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input[type=text] {
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+button {
+    color: #364F6B !important;
+    background-color: #43DDE6 !important;
+    font-size: 1.25em !important;
+    font-weight: 500 !important;
+}
+
+button:hover {
+    background-color: #3fcad1 !important;
+}
