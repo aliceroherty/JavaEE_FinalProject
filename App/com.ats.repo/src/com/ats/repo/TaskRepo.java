@@ -21,7 +21,18 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
 
     @Override
     public int insertTask(ITask task) {
-        return 0;
+        List<IParameter> params = ParameterFactory.createListInstance();
+        
+        IParameter name = ParameterFactory.createInstance(task.getName(), IParameter.Direction.IN, Types.VARCHAR);
+        params.add(name);
+        
+        IParameter description = ParameterFactory.createInstance(task.getDescription(), IParameter.Direction.IN, Types.VARCHAR);
+        params.add(description);
+        
+        IParameter duration = ParameterFactory.createInstance(task.getDuration(), IParameter.Direction.IN, Types.INTEGER);
+        params.add(duration);
+        
+        return (int) db.executeNonQuery("Task_Insert", params).get(0);
     }
 
     @Override
