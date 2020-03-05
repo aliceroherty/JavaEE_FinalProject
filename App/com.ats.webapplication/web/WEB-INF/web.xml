@@ -5,7 +5,32 @@
             30
         </session-timeout>
     </session-config>
+    
     <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
+    
+    <!-- Setting Up Home Controller -->
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>com.ats.controllers.HomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Setting Up Employees Controller -->
+    <servlet>
+        <servlet-name>EmployeesController</servlet-name>
+        <servlet-class>com.ats.controllers.EmployeesController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeesController</servlet-name>
+        <url-pattern>/employees</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeesController</servlet-name>
+        <url-pattern>/createEmployee</url-pattern>
+    </servlet-mapping>
 </web-app>

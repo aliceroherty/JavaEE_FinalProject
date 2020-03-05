@@ -122,7 +122,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `Tasks_GetTask`;
 
 DELIMITER $$
-CREATE PROCEDURE `Tasks_GetTask`(IN EmployeeID INT)
+CREATE PROCEDURE `Tasks_GetTaskemployees`(IN EmployeeID INT)
 BEGIN
 	SELECT * FROM tasks WHERE ID = EmployeeID;
 END$$

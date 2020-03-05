@@ -4,6 +4,16 @@
     Author     : Alice Roherty-Carrier
 --%>
 
+<%@page import="com.ats.viewmodels.EmployeeListViewModel"%>
+<%@page import="com.ats.models.IEmployee"%>
+<%@page import="java.util.List"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    EmployeeListViewModel vm = (EmployeeListViewModel) request.getAttribute("vm");
+    List<IEmployee> employees = vm.getEmployees();
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,5 +21,8 @@
     <body>
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Employees</h1>
+        <c:forEach var="employee" items="${employees}">
+            <h1>${employee.getFirstName()}</h1>
+        </c:forEach>
     </body>
 </html>
