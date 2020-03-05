@@ -21,4 +21,12 @@ public abstract class RepoFactory {
     public static ITaskRepo createTaskInstance() {
         return new TaskRepo();
     }
+    
+     /**
+     * Creates an instance of n Team Repository.
+     * @return Team Repository Instance.
+     */
+    public static ITeamRepo createTeamInstance() {
+        return new TeamRepo();
+    }
 }
