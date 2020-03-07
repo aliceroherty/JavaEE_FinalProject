@@ -1,6 +1,7 @@
 package com.ats.viewmodels;
 
 import com.ats.models.IEmployee;
+import com.ats.models.ITeam;
 import java.util.List;
 
 /**
@@ -18,5 +19,4 @@ public class EmployeeListViewModel {
     public void setEmployees(List<IEmployee> employees) {
         this.employees = employees;
     }
-    
 }

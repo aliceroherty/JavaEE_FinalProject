@@ -30,6 +30,10 @@ form {
     justify-content: space-between;
 }
 
+label{
+    color: #F0F0F0;
+}
+
 input[type=text] {
     font-size: 1.25em;
     font-weight: 500;
