@@ -1,6 +1,7 @@
 body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/com.ats.webapplication/assets/images/background.svg");
     height: 100vh;
+    color: #F0F0F0;
 }
 
 nav img {

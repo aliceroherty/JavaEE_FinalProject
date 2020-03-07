@@ -49,7 +49,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         IParameter deletedAt = ParameterFactory.createInstance(employee.getDeletedAt(), IParameter.Direction.IN, Types.DATE);
         params.add(deletedAt);
         
-        return (int) db.executeNonQuery("Employee_Insert", params).get(0);
+        return (int) db.executeNonQuery("CALL Employee_Insert()", params).get(0);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
     public List<IEmployee> getEmployees() {
         List<IEmployee> employees = EmployeeFactory.createListInstance();
         
-        CachedRowSet results = db.executeFill("Employee_GetAll", ParameterFactory.createListInstance());
+        CachedRowSet results = db.executeFill("CALL Employee_GetAll()", ParameterFactory.createListInstance());
         
         try {
             while (results.next()) {

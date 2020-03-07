@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS `ats`;
 CREATE DATABASE ats;
 
 CREATE TABLE `ats`.`employees` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(20) NOT NULL,
   `LastName` VARCHAR(30) NOT NULL,
   `SIN` INT NOT NULL,
@@ -16,14 +16,14 @@ CREATE TABLE `ats`.`employees` (
   UNIQUE INDEX `SIN_UNIQUE` (`SIN` ASC));
 
 CREATE TABLE `ats`.`tasks` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(50) NOT NULL,
   `Description` VARCHAR(255) NOT NULL,
   `Duration` INT NOT NULL,
   PRIMARY KEY (`ID`));
   
 CREATE TABLE `ats`.`teams` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(50) NOT NULL,
   `IsOnCall` BOOLEAN NOT NULL,
   `CreatedAt` DATETIME NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `ats`.`teams` (
   PRIMARY KEY (`ID`));
   
 CREATE TABLE `ats`.`jobs` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `Description` VARCHAR(255) NOT NULL,
   `ClientName` VARCHAR(50) NOT NULL,
   `Cost` DECIMAL(19,2) NOT NULL,
