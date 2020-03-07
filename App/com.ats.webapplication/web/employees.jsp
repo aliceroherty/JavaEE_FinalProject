@@ -14,6 +14,7 @@
     List<IEmployee> employees = vm.getEmployees();
 %>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,8 +22,6 @@
     <body>
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Employees</h1>
-        <c:forEach var="employee" items="${employees}">
-            <h1>${employee.getFirstName()}</h1>
-        </c:forEach>
+        <h3><%= employees.get(0).getFirstName() %></h3>
     </body>
 </html>

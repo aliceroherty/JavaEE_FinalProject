@@ -19,9 +19,9 @@ import javax.sql.rowset.RowSetProvider;
  * @date 03-03-2020
  */
 public class DAL implements IDAL {
-    private String url = "";
-    private String userName = "";
-    private String password = "";
+    private String url = "jdbc:mysql://localhost:3307/ats?verifyServerCertificate=false&useSSL=false";
+    private String userName = "root";
+    private String password = "Yettiqueen";
 
     /**
      * Execute Non Query performs non query operations on a relation database
@@ -154,7 +154,7 @@ public class DAL implements IDAL {
     private void loadInputParameters(PreparedStatement smt, List<IParameter> params) throws SQLException {
         int i = 1;
         
-        if (params != null) {
+        if (params != null && params.size() != 0) {
             for (IParameter p : params) {
                 smt.setObject(i, p.getValue());
                 i++;
@@ -170,7 +170,7 @@ public class DAL implements IDAL {
      */
     private void propertiesSetUp() throws Exception {
         Properties props = DALHelper.getProperties();
-
+        Class.forName(props.getProperty("database.driver")).newInstance();
         url = props.getProperty("database.url");
         userName = props.getProperty("database.username");
         password = props.getProperty("database.password");

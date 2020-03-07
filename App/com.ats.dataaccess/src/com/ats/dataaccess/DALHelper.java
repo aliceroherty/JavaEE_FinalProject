@@ -16,7 +16,7 @@ public class DALHelper {
 
         try {
             ClassLoader classLoader = DALHelper.class.getClassLoader();
-            in = classLoader.getResourceAsStream("com/properties/db.properties");
+            in = classLoader.getResourceAsStream("com/ats/properties/db.properties");
            
             if (in != null) {
                 props.load(in);
