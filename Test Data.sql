@@ -1,7 +1,59 @@
 USE ats;
 
+TRUNCATE employeetasks;
+TRUNCATE teammembers;
+DELETE FROM employees;
+
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("John", "Doe", 123456789, 15.25, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Jane", "Doe", 987654321, 17.25, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Bob", "Doe", 453654787, 13.25, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Jim", "Morrison", 989764234, 17.50, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Neil", "Young", 187637054, 14.75, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Maynard", "Keenan", 655275435, 18.35, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("James", "Chancellor", 657442835, 16.65, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Danny", "Carey", 543785090, 17.65, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Adam", "Jones", 542838955, 15.45, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("James", "Hetfield", 587632099, 13.40, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Kirk", "Hammett", 554675129, 19.50, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Lars", "Ulrich", 656424989, 18.60, false, sysdate(), NULL, NULL);
+
+INSERT INTO employees 
+(FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
+VALUES ("Jimmy", "McGill", 885765224, 25.60, false, sysdate(), NULL, NULL);
 
 CALL Employee_GetAll();

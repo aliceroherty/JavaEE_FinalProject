@@ -21,6 +21,15 @@ public class Employee extends Base implements IEmployee {
     private List<ITask> skills;
     
     public Employee() {}
+    
+    public Employee(String firstName, String lastName, int sin, double hourlyRate, Date createdAt, boolean isDeleted) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sin = sin;
+        this.hourlyRate = hourlyRate;
+        this.createdAt = createdAt;
+        this.isDeleted = isDeleted;
+    }
 
     @Override
     public int getId() {

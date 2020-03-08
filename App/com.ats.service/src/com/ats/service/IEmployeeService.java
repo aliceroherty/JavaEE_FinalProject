@@ -14,4 +14,5 @@ public interface IEmployeeService {
     int deleteEmployee(int id);
     List<IEmployee> getEmployees();
     IEmployee getEmployee(int id);
+    boolean isValid(IEmployee employee);
 }

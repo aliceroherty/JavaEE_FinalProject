@@ -9,12 +9,6 @@
 <%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-    EmployeeListViewModel vm = (EmployeeListViewModel) request.getAttribute("vm");
-    List<IEmployee> employees = vm.getEmployees();
-%>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +16,14 @@
     <body>
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Employees</h1>
-        <h3><%= employees.get(0).getFirstName() %></h3>
+        <div class="employeeContainer">
+            <c:forEach var="employee" items="${vm.employees}">
+                <div class="card">
+                    <div class="card-body">
+                        <h1><c:out value="${employee.getFirstName()} ${employee.getLastName()}"/></h1>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </body>
 </html>

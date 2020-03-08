@@ -3,12 +3,9 @@
     Created on : 4-Mar-2020, 7:39:29 PM
     Author     : Alice Roherty-Carrier
 --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<%
-    
-%>
 <!DOCTYPE html>
 <html>
     <%@include file="WEB-INF/jspf/head.jspf" %>

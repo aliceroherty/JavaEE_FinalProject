@@ -37,5 +37,10 @@ public class EmployeeService implements IEmployeeService {
     public IEmployee getEmployee(int id) {
         return repo.getEmployee(id);
     }
+
+    @Override
+    public boolean isValid(IEmployee employee) {
+        return employee.getErrors().size() > 0;
+    }
     
 }

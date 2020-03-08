@@ -23,7 +23,12 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
      */
     @Override
     public int insertEmployee(IEmployee employee) {
+        int id = 0;
+        List<Object> returnParams;
         List<IParameter> params = ParameterFactory.createListInstance();
+        
+        IParameter idParam = ParameterFactory.createInstance(id, IParameter.Direction.OUT, Types.INTEGER);
+        params.add(idParam);
         
         IParameter firstName = ParameterFactory.createInstance(employee.getFirstName(), IParameter.Direction.IN, Types.VARCHAR);
         params.add(firstName);
@@ -49,7 +54,17 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         IParameter deletedAt = ParameterFactory.createInstance(employee.getDeletedAt(), IParameter.Direction.IN, Types.DATE);
         params.add(deletedAt);
         
-        return (int) db.executeNonQuery("CALL Employee_Insert()", params).get(0);
+        returnParams = db.executeNonQuery("CALL Employee_Insert();", params);
+        
+        try {
+            if (returnParams != null) {
+                id = Integer.parseInt(returnParams.get(0).toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return id;
     }
 
     @Override
@@ -70,7 +85,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
     public List<IEmployee> getEmployees() {
         List<IEmployee> employees = EmployeeFactory.createListInstance();
         
-        CachedRowSet results = db.executeFill("CALL Employee_GetAll()", ParameterFactory.createListInstance());
+        CachedRowSet results = db.executeFill("CALL Employee_GetAll();", ParameterFactory.createListInstance());
         
         try {
             while (results.next()) {

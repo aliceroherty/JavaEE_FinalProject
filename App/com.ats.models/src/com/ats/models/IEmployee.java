@@ -8,7 +8,7 @@ import java.util.List;
  * @author Alice Roherty-Carrier
  * @date 03-03-2020
  */
-public interface IEmployee {
+public interface IEmployee extends IBase {
     public int getId();
 
     public void setId(int id);

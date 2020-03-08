@@ -4,7 +4,7 @@ DROP PROCEDURE IF EXISTS `Employee_Insert`;
 DELIMITER $$
 USE `ats`$$
 CREATE PROCEDURE `Employee_Insert` (
-	IN ID INT,
+	OUT ID INT,
 	IN FirstName VARCHAR(20),
     IN LastName VARCHAR(30),
     IN SIN INT,
@@ -17,7 +17,6 @@ CREATE PROCEDURE `Employee_Insert` (
 BEGIN
 	INSERT INTO `employees`
 		(
-			`ID`,
             `FirstName`,
             `LastName`,
             `SIN`,
@@ -29,7 +28,6 @@ BEGIN
         )
 	VALUES
 		(
-			ID,
             FirstName,
             LastName,
             SIN,
@@ -39,6 +37,8 @@ BEGIN
             UpdatedAt,
             DeletedAt
         );
+	
+    SET ID = LAST_INSERT_ID();
 END$$
 
 DELIMITER ;
@@ -119,7 +119,7 @@ BEGIN
 END$$
 
 DELIMITER ;
-DROP PROCEDURE IF EXISTS `Tasks_GetTask`;
+DROP PROCEDURE IF EXISTS `Tasks_GetTaskemployees`;
 
 DELIMITER $$
 CREATE PROCEDURE `Tasks_GetTaskemployees`(IN EmployeeID INT)

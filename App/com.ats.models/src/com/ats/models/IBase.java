@@ -10,5 +10,5 @@ import java.util.ArrayList;
 public interface IBase {
     ArrayList<IError> getErrors();
     
-    void addError(IError error);
+    void addError(IError error);    
 }
