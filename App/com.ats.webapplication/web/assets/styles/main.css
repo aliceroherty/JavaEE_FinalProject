@@ -42,14 +42,14 @@ input[type=text] {
     font-weight: 500;
 }
 
-.employeeContainer button {
+.employeeContainer button, #createEmployee button {
     color: #364F6B !important;
     background-color: #43DDE6 !important;
     font-size: 1.25em !important;
     font-weight: 500 !important;
 }
 
-.employeeContainer button:hover {
+.employeeContainer button:hover, #createEmployee button:hover {
     background-color: #3fcad1 !important;
 }
 
