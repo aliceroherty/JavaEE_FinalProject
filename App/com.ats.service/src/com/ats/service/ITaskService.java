@@ -14,4 +14,5 @@ public interface ITaskService {
     int deleteTask(int id);
     List<ITask> getTasks();
     ITask getTask(int id);
+    boolean isValid(ITask task);
 }

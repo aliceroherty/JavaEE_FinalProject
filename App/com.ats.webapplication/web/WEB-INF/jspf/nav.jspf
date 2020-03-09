@@ -24,6 +24,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="tasks">View Tasks</a>
+                    <a class="dropdown-item" href="createTask">Create Task</a>
+                    
                 </div>
             </li>
             <li class="nav-item dropdown">

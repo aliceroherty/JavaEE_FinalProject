@@ -43,6 +43,11 @@
         <servlet-name>TasksController</servlet-name>
         <url-pattern>/tasks</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>TasksController</servlet-name>
+        <url-pattern>/createTask</url-pattern>
+    </servlet-mapping>
+
 
     <!-- Setting up Team controller-->
     <servlet>

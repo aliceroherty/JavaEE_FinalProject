@@ -5,7 +5,7 @@ package com.ats.models;
  * @author Alice Roherty-Carrier
  * @date 03-03-2020
  */
-public interface ITask {
+public interface ITask extends IBase {
     public int getId();
 
     public void setId(int id);

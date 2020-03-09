@@ -2,17 +2,26 @@ package com.ats.models;
 
 /**
  * Task Class
+ *
  * @author Alice Roherty-Carrier
  * @date 03-03-2020
  */
 public class Task extends Base implements ITask {
+
     private int id;
     private String name;
     private String description;
     private int duration;
-    
-    public Task() {}
-    
+
+    public Task() {
+    }
+
+    public Task(String name, String description, int duration) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+    }
+
     public Task(int id, String name, String description, int duration) {
         this.id = id;
         this.name = name;
@@ -59,5 +68,5 @@ public class Task extends Base implements ITask {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-    
+
 }

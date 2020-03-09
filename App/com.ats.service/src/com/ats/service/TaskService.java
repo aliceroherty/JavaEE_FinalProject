@@ -37,5 +37,9 @@ public class TaskService implements ITaskService {
     public ITask getTask(int id) {
         return repo.getTask(id);
     }
+        @Override
+    public boolean isValid(ITask task) {
+        return task.getErrors().size() > 0;
+    }
     
 }
