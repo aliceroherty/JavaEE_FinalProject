@@ -3,6 +3,7 @@ USE ats;
 TRUNCATE employeetasks;
 TRUNCATE teammembers;
 DELETE FROM employees;
+DELETE FROM tasks;
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
@@ -55,5 +56,21 @@ VALUES ("Lars", "Ulrich", 656424989, 18.60, false, sysdate(), NULL, NULL);
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Jimmy", "McGill", 885765224, 25.60, false, sysdate(), NULL, NULL);
+
+INSERT INTO tasks 
+(Name, Description, Duration)
+VALUES ("Test Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
+
+INSERT INTO tasks 
+(Name, Description, Duration)
+VALUES ("Test Task 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
+
+INSERT INTO tasks 
+(Name, Description, Duration)
+VALUES ("Test Task 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
+
+INSERT INTO tasks 
+(Name, Description, Duration)
+VALUES ("Test Task 4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
 
 CALL Employee_GetAll();
