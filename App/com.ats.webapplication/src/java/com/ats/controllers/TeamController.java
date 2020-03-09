@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author soake
  */
 public class TeamController extends CommonController {
-    
+
     private ITeamService service = ServiceFactory.createTeamInstance();
 
-    private static final String CREATE_TEAM = "/team.jsp";
+    private static final String CREATE_TEAM = "/createTeam.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,34 +52,40 @@ public class TeamController extends CommonController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String path = request.getRequestURI();
+        try {
+            String path = request.getRequestURI();
 
-        if (path != null) {
-            String[] pathParts = path.split("/");
-            String action = pathParts[(pathParts.length - 1)];
+            if (path != null) {
+                String[] pathParts = path.split("/");
+                String action = pathParts[(pathParts.length - 1)];
 
-            switch (action) {
-                case "createTeam":
-                    ITeam team = setTeam(request);
-                    team.setId(service.insertTeam(team));
+                switch (action) {
+                    case "createTeam":
+                        ITeam team = setTeam(request);
+                        team.setId(service.insertTeam(team));
 
-                    if (!service.isValid(team)) {
-                        request.setAttribute("errors", team.getErrors());
-                    }
-                    
+                        if (!service.isValid(team)) {
+                            request.setAttribute("errors", team.getErrors());
+                        }
 
-                    super.setView(request, CREATE_TEAM);
-                    break;
+                        if (team.getId() > 0) {
+                            request.setAttribute("message", "Team Created Successfully");
+                        }
+
+                        super.setView(request, CREATE_TEAM);
+                        break;
+                }
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
         super.getView().forward(request, response);
 
     }
 
     private ITeam setTeam(HttpServletRequest request) {
         String name = super.getValue(request, "name");
-        boolean isOnCall = super.getBoolean(request, "onCall");        
+        boolean isOnCall = super.getBoolean(request, "onCall");
         Date createdAt = new Date();
         Date updatedAt = null;
         boolean isDeleted = false;

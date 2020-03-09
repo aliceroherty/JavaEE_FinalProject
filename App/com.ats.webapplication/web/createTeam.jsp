@@ -3,6 +3,7 @@
     Created on : 7-Mar-2020, 1:01:59 AM
     Author     : soake
 --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,5 +21,8 @@
 
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
+        <c:if test="${message != null}">
+            <h2><c:out value="${message}"/></h2>
+        </c:if>
     </body>
 </html>
