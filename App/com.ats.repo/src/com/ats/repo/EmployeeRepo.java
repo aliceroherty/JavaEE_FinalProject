@@ -54,10 +54,10 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         IParameter deletedAt = ParameterFactory.createInstance(employee.getDeletedAt(), IParameter.Direction.IN, Types.DATE);
         params.add(deletedAt);
         
-        returnParams = db.executeNonQuery("CALL Employee_Insert();", params);
+        returnParams = db.executeNonQuery("CALL Employee_Insert(?, ?, ?, ?, ?, ?, ?, ?, ?);", params);
         
         try {
-            if (returnParams != null) {
+            if (returnParams != null && returnParams.size() != 0) {
                 id = Integer.parseInt(returnParams.get(0).toString());
             }
         } catch (Exception e) {

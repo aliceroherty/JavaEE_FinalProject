@@ -20,9 +20,12 @@ public class Employee extends Base implements IEmployee {
     private Date deletedAt;
     private List<ITask> skills;
     
-    public Employee() {}
+    public Employee() {
+        super();
+    }
     
     public Employee(String firstName, String lastName, int sin, double hourlyRate, Date createdAt, boolean isDeleted) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.sin = sin;

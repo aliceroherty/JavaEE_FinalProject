@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <%@include file="WEB-INF/jspf/head.jspf" %>
-    <body>
+    <body id="createEmployee">
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Create Employee</h1>
         <form method="POST" class="mx-auto mt-4">
@@ -19,5 +19,8 @@
             <input type="text" name="hourlyRate" placeholder="Hourly Rate" class="form-control text-center"/>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
+        <c:if test="${message != null}">
+            <h2><c:out value="${message}"/></h2>
+        </c:if>
     </body>
 </html>

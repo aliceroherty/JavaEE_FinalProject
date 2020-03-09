@@ -48,33 +48,41 @@ public class EmployeesController extends CommonController {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-        String path = request.getRequestURI();
+        try {
+            String path = request.getRequestURI();
         
-        if (path != null) {
-            String[] pathParts = path.split("/");
-            String action = pathParts[(pathParts.length - 1)];
-            
-            switch (action) {
-                case "employees":
-                    EmployeeListViewModel vm = new EmployeeListViewModel();
-                    vm.setEmployees(service.getEmployees());
-                    request.setAttribute("vm", vm);
-                    super.setView(request, EMPLOYEES);
-                    break;
-                case "createEmployee":
-                    IEmployee employee = setEmployee(request);
-                    employee.setId(service.insertEmployee(employee));
-                    
-                    if (!service.isValid(employee)) {
-                        request.setAttribute("errors", employee.getErrors());
-                    }
-                    
-                    super.setView(request, CREATE_EMPLOYEE);
-                    break;
+            if (path != null) {
+                String[] pathParts = path.split("/");
+                String action = pathParts[(pathParts.length - 1)];
+
+                switch (action) {
+                    case "employees":
+                        EmployeeListViewModel vm = new EmployeeListViewModel();
+                        vm.setEmployees(service.getEmployees());
+                        request.setAttribute("vm", vm);
+                        super.setView(request, EMPLOYEES);
+                        break;
+                    case "createEmployee":
+                        IEmployee employee = setEmployee(request);
+                        employee.setId(service.insertEmployee(employee));
+
+                        if (!service.isValid(employee)) {
+                            request.setAttribute("errors", employee.getErrors());
+                        }
+                        
+                        if (employee.getId() > 0) {
+                            request.setAttribute("message", "Employee Created Successfully");
+                        }
+
+                        super.setView(request, CREATE_EMPLOYEE);
+                        break;
+                }
             }
+
+            super.getView().forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        
-        super.getView().forward(request, response);
     }
     
     private IEmployee setEmployee(HttpServletRequest request) {

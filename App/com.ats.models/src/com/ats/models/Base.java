@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class Base implements IBase, Serializable {
     private ArrayList<IError> errors;
 
+    public Base() {
+        this.errors = new ArrayList();
+    }
+
     @Override
     public ArrayList<IError> getErrors() {
         return this.errors;

@@ -27,7 +27,7 @@ h1 {
 
 form {
     width: 80%;
-    height: 70%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -88,4 +88,9 @@ button:hover {
 
 .card:last-child {
     margin-bottom: 3em;
+}
+
+#createEmployee h2 {
+    text-align: center;
+    margin-top: 1em;
 }
