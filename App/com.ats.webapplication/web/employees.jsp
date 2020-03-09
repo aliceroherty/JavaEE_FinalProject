@@ -17,13 +17,15 @@
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Employees</h1>
         <div class="employeeContainer">
-            <c:forEach var="employee" items="${vm.employees}">
-                <div class="card">
-                    <div class="card-body">
-                        <h1><c:out value="${employee.getFirstName()} ${employee.getLastName()}"/></h1>
+            <c:if test="${vm.getEmployees().size() > 0}">
+                <c:forEach var="employee" items="${vm.getEmployees()}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1><c:out value="${employee.getFirstName()} ${employee.getLastName()}"/></h1>
+                        </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </c:if>
         </div>
     </body>
 </html>

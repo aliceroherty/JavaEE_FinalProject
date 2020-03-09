@@ -42,14 +42,14 @@ input[type=text] {
     font-weight: 500;
 }
 
-button {
+.employeeContainer button {
     color: #364F6B !important;
     background-color: #43DDE6 !important;
     font-size: 1.25em !important;
     font-weight: 500 !important;
 }
 
-button:hover {
+.employeeContainer button:hover {
     background-color: #3fcad1 !important;
 }
 
@@ -81,16 +81,139 @@ button:hover {
     justify-content: center;
 }
 
-.card:nth-child(4n + 4) {
+.employeeContainer .card:nth-child(4n + 4) {
     margin-right: 0 !important;
     margin-bottom: 3em;
 }
 
-.card:last-child {
+.employeeContainer .card:last-child {
     margin-bottom: 3em;
 }
 
 #createEmployee h2 {
     text-align: center;
     margin-top: 1em;
+}
+
+.card h1, .card h3 {
+    color: #364F6B;
+}
+
+.taskContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 5%;
+}
+
+.taskContainer a {
+    width: 32%;
+    height: 60vh;
+    margin-right: 2%;
+}
+
+.taskContainer a:nth-child(3n + 3) {
+    margin-right: 0 !important;
+    margin-bottom: 1em;
+}
+
+.taskContainer a:last-child {
+    margin-bottom: 1em;
+}
+
+.taskContainer .card {
+    transition: transform 200ms ease-in-out;
+    border: none;
+    height: 100%;
+}
+
+.taskContainer .card:hover {
+    transform: scale(1.025);
+    cursor: pointer;
+}
+
+.taskContainer .card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.taskContainer .card h3 {
+    text-align: center;
+}
+
+.taskContainer .card h1 {
+    margin-bottom: 5%;
+}
+
+.taskContainer .card .btn {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.modal, .modal h1 {
+    color: #364F6B;
+}
+
+.btn-primary {
+    background-color: #43DDE6;
+    border: none;
+    color: #364F6B;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #3dccd4;
+    color: #364F6B;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background-color: #364F6B;
+    border: none;
+    color: #F0F0F0;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    background-color: #446387;
+    color: #F0F0F0;
+    box-shadow: none;
+}
+
+.btn-danger {
+    background-color: #FC5185;
+    border: none;
+    color: #F0F0F0;
+}
+
+.btn-danger:hover, .btn-danger:focus {
+    background-color: #d94874;
+    color: #F0F0F0;
+    box-shadow: none;
+}
+
+.modal .btn {
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+.modal #topContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+}
+
+#topContainer #idContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 15%;
+}
+
+.modal .title {
+    font-weight: bold;
+}
+
+#topContainer #durationContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
 }

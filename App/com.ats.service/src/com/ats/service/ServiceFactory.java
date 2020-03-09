@@ -13,4 +13,8 @@ public abstract class ServiceFactory {
     public static ITeamService createTeamInstance(){
         return new TeamService();
     }
+    
+    public static ITaskService createTaskInstance() {
+        return new TaskService();
+    }
 }

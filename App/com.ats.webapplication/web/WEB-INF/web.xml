@@ -33,4 +33,14 @@
         <servlet-name>EmployeesController</servlet-name>
         <url-pattern>/createEmployee</url-pattern>
     </servlet-mapping>
+    
+    <!-- Setting Up Tasks Controller -->
+    <servlet>
+        <servlet-name>TasksController</servlet-name>
+        <servlet-class>com.ats.controllers.TasksController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TasksController</servlet-name>
+        <url-pattern>/tasks</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -23,7 +23,7 @@
                     Tasks
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">View Tasks</a>
+                    <a class="dropdown-item" href="tasks">View Tasks</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
