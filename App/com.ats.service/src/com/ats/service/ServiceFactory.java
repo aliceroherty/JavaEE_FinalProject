@@ -9,4 +9,8 @@ public abstract class ServiceFactory {
     public static IEmployeeService createEmployeeInstance() {
         return new EmployeeService();
     }
+    
+    public static ITeamService createTeamInstance(){
+        return new TeamService();
+    }
 }

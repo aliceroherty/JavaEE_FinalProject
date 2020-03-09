@@ -14,6 +14,15 @@ import java.util.Date;
  */
 public class Team extends Base implements ITeam {
 
+    public Team(String name, boolean isOnCall, Date createdAt, Date updatedAt, boolean isDeleted, Date deletedAt) {
+        this.name = name;
+        this.isOnCall = isOnCall;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isDeleted = isDeleted;
+        this.deletedAt = deletedAt;
+    }
+
     private int id;
     private String name;
     private boolean isOnCall;

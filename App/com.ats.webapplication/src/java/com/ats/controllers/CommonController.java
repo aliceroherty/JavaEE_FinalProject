@@ -6,21 +6,38 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Common Controller
+ *
  * @author Alice Roherty-Carrier
  * @date 03-04-2020
  */
 public class CommonController extends HttpServlet {
 
     private RequestDispatcher view;
-    
-    public RequestDispatcher getView(){
+
+    public RequestDispatcher getView() {
         return view;
     }
-    
-    public void setView(HttpServletRequest request,String viewPath){
+
+    public void setView(HttpServletRequest request, String viewPath) {
         view = request.getRequestDispatcher(viewPath);
     }
-        
+
+    protected boolean getBoolean(String value) {
+        try {
+            return Boolean.parseBoolean(value);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean getBoolean(HttpServletRequest request, String key) {
+        try {
+            return Boolean.parseBoolean(request.getParameter(key));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     protected int getInteger(String value) {
         try {
             return Integer.parseInt(value);
@@ -28,7 +45,7 @@ public class CommonController extends HttpServlet {
             return 0;
         }
     }
-    
+
     protected int getInteger(HttpServletRequest request, String key) {
         try {
             return Integer.parseInt(request.getParameter(key));
@@ -44,7 +61,7 @@ public class CommonController extends HttpServlet {
             return 0.0;
         }
     }
-    
+
     protected double getDouble(HttpServletRequest request, String key) {
         try {
             return Double.parseDouble(request.getParameter(key));
@@ -54,7 +71,7 @@ public class CommonController extends HttpServlet {
     }
 
     protected String getValue(HttpServletRequest request, String key) {
-        return request.getParameter(key);       
+        return request.getParameter(key);
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Sam Oakes
  * @date 03-04-2020
  */
-public interface ITeam {
+public interface ITeam extends IBase {
     
      public int getId();
 
