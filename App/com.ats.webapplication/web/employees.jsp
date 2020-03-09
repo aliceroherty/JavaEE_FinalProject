@@ -13,17 +13,45 @@
 <!DOCTYPE html>
 <html>
     <%@include file="WEB-INF/jspf/head.jspf" %>
-    <body>
-        <%@include file="WEB-INF/jspf/nav.jspf" %>
-        <h1 class="mt-3">Employees</h1>
-        <div class="employeeContainer">
-            <c:forEach var="employee" items="${vm.employees}">
+<body>
+    <%@include file="WEB-INF/jspf/nav.jspf" %>
+    <h1 class="mt-3">Employees</h1>
+    <div class="employeeContainer">
+        <c:if test="${vm.getEmployees().size() > 0}">
+        <c:forEach var="employee" items="${vm.employees}">
+            <a data-toggle="modal" data-target="#employee${employee.getId()}"/>
                 <div class="card">
                     <div class="card-body">
                         <h1><c:out value="${employee.getFirstName()} ${employee.getLastName()}"/></h1>
                     </div>
                 </div>
+            </a>
+        </c:forEach>
+        </c:if>
+    </div>
+     <c:if test="${vm.getEmployees().size() > 0}">
+            <c:forEach var="employee" items="${vm.getEmployees()}">                 
+                <div class="modal fade" id="employee${employee.getId()}" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title" id="exampleModalLongTitle">${employee.getFirstName()} ${employee.getLastName()}</h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
-        </div>
-    </body>
+        </c:if>
+</body>
 </html>
