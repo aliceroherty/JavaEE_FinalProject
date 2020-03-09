@@ -31,7 +31,12 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
      */
     @Override
     public int insertTeam(ITeam team) {
+        int id = 0;
+        List<Object> returnParams;
         List<IParameter> params = ParameterFactory.createListInstance();
+
+        IParameter idParam = ParameterFactory.createInstance(id, IParameter.Direction.OUT, Types.INTEGER);
+        params.add(idParam);
 
         IParameter name = ParameterFactory.createInstance(team.getName(), IParameter.Direction.IN, Types.VARCHAR);
         params.add(name);
@@ -51,7 +56,16 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         IParameter deletedAt = ParameterFactory.createInstance(team.getDeletedAt(), IParameter.Direction.IN, Types.DATE);
         params.add(deletedAt);
 
-        return (int) db.executeNonQuery("Team_Insert", params).get(0);
+        returnParams = db.executeNonQuery("CALL Team_Insert(?,?,?,?,?,?,?);", params);
+
+        try {
+            if (returnParams != null && returnParams.size() != 0) {
+                id = Integer.parseInt(returnParams.get(0).toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
     }
 
     @Override
