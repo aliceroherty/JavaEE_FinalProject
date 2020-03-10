@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <%@include file="WEB-INF/jspf/head.jspf" %>
-    <body id="createEmployee">
+    <body id="createTask">
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Create Task</h1>
         <form method="POST" class="mx-auto mt-4">

@@ -63,31 +63,35 @@ input[type=text] {
     color: #364F6B;
 }
 
-.employeeContainer .card {
+.employeeContainer a {
     transition: transform 200ms ease-in-out;
     width: 22.75%;
     height: 9em;
     margin-right: 3%;
 }
 
-.employeeContainer .card:hover {
+.employeeContainer a:hover {
     transform: scale(1.025);
     cursor: pointer;
+}
+
+.employeeContainer a:nth-child(4n + 4) {
+    margin-right: 0 !important;
+    margin-bottom: 3em;
+}
+
+.employeeContainer a:last-child {
+    margin-bottom: 3em;
+}
+
+.employeeContainer .card {
+    height: 100%;
 }
 
 .employeeContainer .card .card-body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.employeeContainer .card:nth-child(4n + 4) {
-    margin-right: 0 !important;
-    margin-bottom: 3em;
-}
-
-.employeeContainer .card:last-child {
-    margin-bottom: 3em;
 }
 
 #createEmployee h2 {
