@@ -217,3 +217,14 @@ input[type=text] {
     justify-content: space-between;
     width: 40%;
 }
+
+#createTask form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;  
+}
+
+#createTask form textarea {
+    height: 30%;
+}
