@@ -64,6 +64,5 @@
                 </div>
             </c:forEach>
         </c:if>
-        <script src="assets/js/triggerButtonClick.js"></script>
     </body>
 </html>
