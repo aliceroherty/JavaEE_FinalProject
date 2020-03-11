@@ -39,7 +39,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div id="topContainer">
+                                <div class="topContainer">
                                     <div id="idContainer">
                                         <h3 class="title">ID:</h3>
                                         <h3 class="title">${task.getId()}</h3>
