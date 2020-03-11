@@ -1,3 +1,59 @@
+/*
+    Overriding Bootstrap Classes
+*/
+.btn-primary {
+    background-color: #43DDE6;
+    border: none;
+    color: #364F6B;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #3dccd4 !important;
+    color: #364F6B !important;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background-color: #364F6B;
+    border: none;
+    color: #F0F0F0;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+    background-color: #446387;
+    color: #F0F0F0;
+    box-shadow: none;
+}
+
+.btn-danger {
+    background-color: #FC5185;
+    border: none;
+    color: #F0F0F0;
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+    background-color: #d94874;
+    color: #F0F0F0;
+    box-shadow: none;
+}
+
+.btn-outline-primary {
+    border-color: #43DDE6;
+    color: #43DDE6;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:not(:disabled):not(.disabled):active {
+    background-color: #43DDE6;
+    border-color: #43DDE6;
+    color: #364F6B;
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    border-color: rgba(67, 221, 230, 0.8);
+    box-shadow: 0 0 0 0.2rem rgba(67, 221, 230, .25);
+}
+
 body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/com.ats.webapplication/assets/images/background.svg");
     background-attachment: fixed;
@@ -25,7 +81,23 @@ h1 {
     margin-bottom: 2.5%;
 }
 
-form {
+#createEmployee form {
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#createTask form {
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#createTeam form {
     width: 80%;
     height: 60%;
     display: flex;
@@ -37,19 +109,19 @@ label{
     color: #F0F0F0;
 }
 
-input[type=text] {
+.form-control {
     font-size: 1.25em;
     font-weight: 500;
 }
 
-.employeeContainer button, #createEmployee button {
+.submitButton {
     color: #364F6B !important;
     background-color: #43DDE6 !important;
     font-size: 1.25em !important;
     font-weight: 500 !important;
 }
 
-.employeeContainer button:hover, #createEmployee button:hover {
+.submitButton:hover {
     background-color: #3fcad1 !important;
 }
 
@@ -77,11 +149,11 @@ input[type=text] {
 
 .employeeContainer a:nth-child(4n + 4) {
     margin-right: 0 !important;
-    margin-bottom: 3em;
+    margin-bottom: 3%;
 }
 
 .employeeContainer a:last-child {
-    margin-bottom: 3em;
+    margin-bottom: 3%;
 }
 
 .employeeContainer .card {
@@ -159,42 +231,6 @@ input[type=text] {
     color: #364F6B;
 }
 
-.btn-primary {
-    background-color: #43DDE6;
-    border: none;
-    color: #364F6B;
-}
-
-.btn-primary:hover, .btn-primary:focus {
-    background-color: #3dccd4;
-    color: #364F6B;
-    box-shadow: none;
-}
-
-.btn-secondary {
-    background-color: #364F6B;
-    border: none;
-    color: #F0F0F0;
-}
-
-.btn-secondary:hover, .btn-secondary:focus {
-    background-color: #446387;
-    color: #F0F0F0;
-    box-shadow: none;
-}
-
-.btn-danger {
-    background-color: #FC5185;
-    border: none;
-    color: #F0F0F0;
-}
-
-.btn-danger:hover, .btn-danger:focus {
-    background-color: #d94874;
-    color: #F0F0F0;
-    box-shadow: none;
-}
-
 .modal .btn {
     font-size: 1.25em;
     font-weight: 500;
@@ -231,4 +267,20 @@ input[type=text] {
 
 #createTask form textarea {
     height: 30%;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5% 2% 5%;
+}
+
+.searchForm input[type=text] {
+    flex: 17;
+    text-align: center;
+}
+
+.searchForm button {
+    flex: 1;
+    margin-left: 2%;
 }

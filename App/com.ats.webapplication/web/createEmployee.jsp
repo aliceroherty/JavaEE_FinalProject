@@ -17,7 +17,7 @@
             <input type="text" name="lastName" placeholder="Last Name" class="form-control text-center"/>
             <input type="text" name="sin" placeholder="SIN" class="form-control text-center"/>
             <input type="text" name="hourlyRate" placeholder="Hourly Rate" class="form-control text-center"/>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary submitButton">Create</button>
         </form>
         <c:if test="${message != null}">
             <h2><c:out value="${message}"/></h2>

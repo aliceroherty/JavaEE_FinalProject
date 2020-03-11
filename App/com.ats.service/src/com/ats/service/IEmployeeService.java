@@ -15,4 +15,5 @@ public interface IEmployeeService {
     List<IEmployee> getEmployees();
     IEmployee getEmployee(int id);
     boolean isValid(IEmployee employee);
+    List<IEmployee> searchEmployees(String searchText);
 }

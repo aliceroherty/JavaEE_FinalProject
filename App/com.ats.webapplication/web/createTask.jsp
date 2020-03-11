@@ -16,7 +16,7 @@
             <input type="text" name="name" placeholder="Name" class="form-control text-center" />
             <textarea name="description" placeholder="Description" class="form-control text-center"></textarea>
             <input type="text" name="duration" placeholder="Duration" class="form-control text-center"/>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary submitButton">Create</button>
         </form>
         <c:if test="${message != null}">
             <h2><c:out value="${message}"/></h2>
