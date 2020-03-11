@@ -200,23 +200,42 @@ input[type=text] {
     font-weight: 500;
 }
 
-.modal #topContainer {
+.modal .topContainer {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1.5em;
 }
 
-#topContainer #idContainer {
+.topContainer #idContainer {
     display: flex;
     justify-content: space-between;
     width: 15%;
 }
 
+#empIDContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+}   
+
+#rateContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+
+}
 .modal .title {
     font-weight: bold;
 }
 
-#topContainer #durationContainer {
+
+.topContainer #durationContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.topContainer .dateContainer {
     display: flex;
     justify-content: space-between;
     width: 40%;
@@ -231,4 +250,10 @@ input[type=text] {
 
 #createTask form textarea {
     height: 30%;
+}
+
+.topContainer #sinContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
 }

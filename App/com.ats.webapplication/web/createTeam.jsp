@@ -18,7 +18,13 @@
                 <input type="checkbox" class="form-check-input" name="onCall" id="onCall">
                 <label class="form-check-label" for="onCall">On Call</label>
             </div>
-
+            <div>
+                <select name="member1">
+                    <option value="categoryID">
+                        
+                    </option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
         <c:if test="${message != null}">
