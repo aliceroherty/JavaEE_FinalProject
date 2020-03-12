@@ -82,30 +82,7 @@
                                     <h3 class="title">Created:</h3>
                                     <h3>${employee.getCreatedAt()}</h3>
                                 </div>
-                                <div id="descriptionContainer">
-                                    <h3 class="title">Updated:</h3>
-                                    <h3>${employee.getUpdatedAt()}</h3>
-                                </div>
-                                <div id="descriptionContainer">
-                                    <h3 class="title">Deleted:</h3>
-                                    <h3>${employee.getDeletedAt()}</h3>
-                                </div>
                             </div>
-                            <div id="descriptionContainer">
-                                <h3 class="title">Hourly Rate:</h3>
-                                <h3>${employee.getHourlyRate()}</h3>
-                            </div>
-                                <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt() != null}"> 
-                                    <div class="topContainer">
-                                        <div class="dateContainer">
-                                            <h3 class="title">Updated:</h3>
-                                            <h3>${employee.getUpdatedAt()}</h3>
-                                        </div>
-                                        <div class="dateContainer">
-                                            <h3 class="title">Deleted:</h3>
-                                            <h3>${employee.getDeletedAt()}</h3>
-                                        </div>
-                                </c:if>
                             <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt() != null}"> 
                                 <div class="topContainer">
                                     <div class="dateContainer">
@@ -116,9 +93,8 @@
                                         <h3 class="title">Deleted:</h3>
                                         <h3>${employee.getDeletedAt()}</h3>
                                     </div>
-                                </c:if>
-                            
-
+                                </div>
+                            </c:if>
                             <div class="modal-footer">	
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
                                 <button type="button" class="btn btn-primary">Update</button>	
