@@ -4,6 +4,7 @@ TRUNCATE employeetasks;
 TRUNCATE teammembers;
 DELETE FROM employees;
 DELETE FROM tasks;
+DELETE FROM teams;
 
 CALL Team_Insert(@teamID, "Team 1", 0, SYSDATE(), NULL, 0, NULL);
 

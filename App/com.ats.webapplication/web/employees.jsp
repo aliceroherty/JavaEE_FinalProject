@@ -85,14 +85,18 @@
                             </div>
                             <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt() != null}"> 
                                 <div class="topContainer">
-                                    <div class="dateContainer">
-                                        <h3 class="title">Updated:</h3>
-                                        <h3>${employee.getUpdatedAt()}</h3>
-                                    </div>
-                                    <div class="dateContainer">
-                                        <h3 class="title">Deleted:</h3>
-                                        <h3>${employee.getDeletedAt()}</h3>
-                                    </div>
+                                    <c:if test="${employee.getUpdatedAt() != null}">
+                                        <div class="dateContainer">
+                                            <h3 class="title">Updated:</h3>
+                                            <h3>${employee.getUpdatedAt()}</h3>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${employee.getDeletedAt() != null}">
+                                        <div class="dateContainer">
+                                            <h3 class="title">Deleted:</h3>
+                                            <h3>${employee.getDeletedAt()}</h3>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </c:if>
                             <div class="modal-footer">	
@@ -103,6 +107,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </c:forEach>
     </c:if>
 </body>

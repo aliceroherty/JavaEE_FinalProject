@@ -165,7 +165,7 @@ BEGIN
         createdAt = createdAt,
         UpdatedAt = UpdatedAt,
         DeletedAt = DeletedAt
-	WHERE ID = EmployeexID;
+	WHERE ID = EmployeeID;
 END$$
 
 DELIMITER ;
@@ -184,4 +184,60 @@ DELIMITER $$
 CREATE PROCEDURE `Tasks_GetTaskemployees`(IN EmployeeID INT)
 BEGIN
 	SELECT * FROM tasks WHERE ID = EmployeeID;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Tasks_GetTaskemployees`;
+
+DELIMITER $$
+CREATE PROCEDURE `JobTasks_Insert`(
+	IN TaskID INT,
+    IN JobID INT
+)
+BEGIN
+	INSERT INTO jobtasks (
+		`TaskID`,
+        `JobID`
+    )
+    VALUES (
+		TaskID,
+        JobID
+    );
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Jobs_Insert`;
+
+DELIMITER $$
+CREATE PROCEDURE `Jobs_Insert`(
+	OUT JobID INT,
+    IN Description VARCHAR(255),
+    IN ClientName VARCHAR(50),
+    IN Cost DECIMAL(19, 2),
+    IN Revenue DECIMAL(19, 2),
+    IN StartTime DATETIME,
+    IN EndTime DATETIME,
+    IN TeamID INT
+)
+BEGIN
+	INSERT INTO jobs (
+		`Description`,
+        `ClientName`,
+        `Cost`,
+        `Revenue`,
+        `StartTime`,
+        `EndTime`,
+        `TeamID`
+    ) 
+    VALUES (
+		Description,
+        ClientName,
+        Cost,
+        Revenue,
+        StartTime,
+        EndTime,
+        TeamID
+    );
+    
+    SET JobID = LAST_INSERT_ID();
 END$$

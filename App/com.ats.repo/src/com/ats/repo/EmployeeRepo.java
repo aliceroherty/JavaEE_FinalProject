@@ -76,8 +76,8 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         params.add(ParameterFactory.createInstance(employee.getId()));
         params.add(ParameterFactory.createInstance(employee.getFirstName()));
         params.add(ParameterFactory.createInstance(employee.getLastName()));
-        params.add(ParameterFactory.createInstance(employee.getHourlyRate()));
         params.add(ParameterFactory.createInstance(employee.getSIN()));
+        params.add(ParameterFactory.createInstance(employee.getHourlyRate()));
         params.add(ParameterFactory.createInstance(employee.isDeleted()));
         params.add(ParameterFactory.createInstance(employee.getCreatedAt()));
         params.add(ParameterFactory.createInstance(employee.getUpdatedAt()));

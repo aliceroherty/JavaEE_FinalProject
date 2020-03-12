@@ -303,7 +303,7 @@ label{
     flex: 1;
     margin-left: 2%;
 }
-    
+
 .topContainer #sinContainer {
     display: flex;
     justify-content: space-between;
@@ -314,4 +314,20 @@ label{
     text-align: center;
 }
 
+@media only screen and (max-width: 992px) {
+    .employeeContainer a {
+        width: 100%;
+        height: 9em;
+        margin-right: 0% !important;
+        margin-bottom: 1em;
+    }
 
+    .employeeContainer a:nth-child(4n + 4) {
+        margin-right: 0 !important;
+        margin-bottom: 1em;
+    }
+
+    .employeeContainer a:last-child {
+        margin-bottom: 1em;
+    }
+}

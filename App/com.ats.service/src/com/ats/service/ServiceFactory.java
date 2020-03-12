@@ -17,4 +17,8 @@ public abstract class ServiceFactory {
     public static ITaskService createTaskInstance() {
         return new TaskService();
     }
+    
+    public static IJobService createJobInstance() {
+        return new JobService();
+    }
 }

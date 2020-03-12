@@ -15,7 +15,7 @@ public abstract class RepoFactory {
     }
     
     /**
-     * Creates an instance of an Task Repository.
+     * Creates an instance of a Task Repository.
      * @return Task Repository Instance.
      */
     public static ITaskRepo createTaskInstance() {
@@ -23,10 +23,18 @@ public abstract class RepoFactory {
     }
     
      /**
-     * Creates an instance of n Team Repository.
+     * Creates an instance of a Team Repository.
      * @return Team Repository Instance.
      */
     public static ITeamRepo createTeamInstance() {
         return new TeamRepo();
+    }
+    
+    /**
+     * Creates an instance of a Job Repository.
+     * @return Job Repository Instance
+     */
+    public static IJobRepo createJobInstance() {
+        return new JobRepo();
     }
 }
