@@ -20,6 +20,8 @@ public interface IEmployee extends IBase {
     public String getLastName();
 
     public void setLastName(String lastName);
+    
+    public String getFullName();
 
     public int getSIN();
 

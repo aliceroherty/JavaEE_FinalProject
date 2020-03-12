@@ -17,4 +17,5 @@ public interface ITeamService {
     int updateTeam(ITeam employee);
     int deleteTeam(int id);
     boolean isValid(ITeam team);
+    List<ITeam> GetTeams();
 }

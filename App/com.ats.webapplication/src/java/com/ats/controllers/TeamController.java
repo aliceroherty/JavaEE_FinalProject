@@ -5,14 +5,18 @@
  */
 package com.ats.controllers;
 
+import com.ats.models.IEmployee;
 import com.ats.models.ITeam;
 import com.ats.models.TeamFactory;
+import com.ats.service.IEmployeeService;
 import com.ats.service.ITeamService;
 import com.ats.service.ServiceFactory;
+import com.ats.viewmodels.CreateTeamViewModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Math.sin;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,13 +41,21 @@ public class TeamController extends CommonController {
         if (path != null) {
             String[] pathParts = path.split("/");
             String action = pathParts[(pathParts.length - 1)];
-
-            switch (action) {
-                case "createTeam":
-                    super.setView(request, CREATE_TEAM);
-                    break;
-            }
+            
+            
+            CreateTeamViewModel vm = new CreateTeamViewModel();
+            vm.setEmployee(getEmployees());
+            request.setAttribute("vm", vm);
+            
+            
         }
+        else
+        {
+            service.GetTeams();
+        }
+        
+        
+        super.setView(request, CREATE_TEAM);
 
         super.getView().forward(request, response);
 
@@ -81,6 +93,13 @@ public class TeamController extends CommonController {
         }
         super.getView().forward(request, response);
 
+    }
+    
+    private List<IEmployee> getEmployees(){
+        IEmployeeService empService = ServiceFactory.createEmployeeInstance();
+        List<IEmployee> employees = empService.getEmployees();
+        
+        return employees;       
     }
 
     private ITeam setTeam(HttpServletRequest request) {

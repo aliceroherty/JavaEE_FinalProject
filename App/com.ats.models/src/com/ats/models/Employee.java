@@ -5,10 +5,12 @@ import java.util.List;
 
 /**
  * Employee Class
+ *
  * @author Alice Roherty-Carrier
  * @date 03-03-2020
  */
 public class Employee extends Base implements IEmployee {
+
     private int id;
     private String firstName;
     private String lastName;
@@ -19,11 +21,16 @@ public class Employee extends Base implements IEmployee {
     private Date updatedAt;
     private Date deletedAt;
     private List<ITask> skills;
-    
+    private String fullName;
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName() ;
+    }
+
     public Employee() {
         super();
     }
-    
+
     public Employee(String firstName, String lastName, int sin, double hourlyRate, Date createdAt, boolean isDeleted) {
         super();
         this.firstName = firstName;
