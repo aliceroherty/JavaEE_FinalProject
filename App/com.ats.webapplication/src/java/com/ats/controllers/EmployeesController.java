@@ -33,7 +33,9 @@ public class EmployeesController extends CommonController {
             switch (action) {
                 case "employees":
                     EmployeeListViewModel vm = new EmployeeListViewModel();
+                    
                     vm.setEmployees(service.getEmployees());
+                    
                     request.setAttribute("vm", vm);
                     super.setView(request, EMPLOYEES);
                     break;
@@ -58,8 +60,21 @@ public class EmployeesController extends CommonController {
                 switch (action) {
                     case "employees":
                         EmployeeListViewModel vm = new EmployeeListViewModel();
-                        vm.setEmployees(service.getEmployees());
+                        
+                        String searchText = getValue(request, "search");
+                        
+                        if (!searchText.equals("")) {
+                            vm.setEmployees(service.searchEmployees(searchText));
+                        } else {
+                            vm.setEmployees(service.getEmployees());
+                        }
+                        
                         request.setAttribute("vm", vm);
+                        
+                        if (vm.getEmployees().size() == 0) {
+                            request.setAttribute("message", "No Results");
+                        }
+                        
                         super.setView(request, EMPLOYEES);
                         break;
                     case "createEmployee":

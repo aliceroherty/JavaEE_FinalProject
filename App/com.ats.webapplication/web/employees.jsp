@@ -17,6 +17,13 @@
     <body>
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Employees</h1>
+        <form class="searchForm" method="post">
+            <input type="text" name="search" class="form-control"/>
+            <button type="submit" class="btn btn-outline-primary"><span><i class="fas fa-search"></i></span></button>
+        </form>
+        <c:if test="${message != null}">
+            <h3 class="text-center">${message}</h3>
+        </c:if>
         <div class="employeeContainer">
             <c:if test="${vm.getEmployees().size() > 0}">
                 <c:forEach var="employee" items="${vm.employees}">
@@ -75,6 +82,23 @@
                                     <h3 class="title">Created:</h3>
                                     <h3>${employee.getCreatedAt()}</h3>
                                 </div>
+                                <div id="descriptionContainer">
+                                    <h3 class="title">Updated:</h3>
+                                    <h3>${employee.getUpdatedAt()}</h3>
+                                </div>
+                                <div id="descriptionContainer">
+                                    <h3 class="title">Deleted:</h3>
+                                    <h3>${employee.getDeletedAt()}</h3>
+                                </div>
+                            </div>
+                            <div id="descriptionContainer">
+                                <h3 class="title">Hourly Rate:</h3>
+                                <h3>${employee.getHourlyRate()}</h3>
+                            </div>
+                            <c:if test="${employee.isDeleted() == true}">
+                            <div id="descriptionContainer">
+                                <h3 class="title">Deleted:</h3>
+                                <h3>Yes</h3>
                             </div>
                             <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt()}"> 
                                 <div class="topContainer">
