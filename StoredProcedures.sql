@@ -185,3 +185,23 @@ CREATE PROCEDURE `Tasks_GetTaskemployees`(IN EmployeeID INT)
 BEGIN
 	SELECT * FROM tasks WHERE ID = EmployeeID;
 END$$
+
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `ats`.`TeamMember_Insert`;
+
+DELIMITER $$
+
+CREATE PROCEDURE `TeamMember_Insert`(
+IN TeamID INT,
+IN EmployeeID INT
+)
+BEGIN
+INSERT INTO `ats`.`teammembers`
+(`TeamID`, `EmployeeID`)
+VALUES
+(TeamID, EmployeeID);
+END$$
+
+DELIMITER ;
