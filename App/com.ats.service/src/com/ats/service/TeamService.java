@@ -37,4 +37,10 @@ public class TeamService implements ITeamService {
     public boolean isValid(ITeam team) {
         return team.getErrors().size() > 0;
     }
+    
+    @Override
+    public List<ITeam> GetTeams(){
+        //chris said do this because its not implimented till later userstories.
+        return null;  
+    }
 }

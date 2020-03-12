@@ -8,7 +8,7 @@
 <%@page import="com.ats.models.IEmployee"%>
 <%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -95,7 +95,7 @@
                                 <h3 class="title">Hourly Rate:</h3>
                                 <h3>${employee.getHourlyRate()}</h3>
                             </div>
-                                <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt()}"> 
+                                <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt() != null}"> 
                                     <div class="topContainer">
                                         <div class="dateContainer">
                                             <h3 class="title">Updated:</h3>
@@ -105,9 +105,19 @@
                                             <h3 class="title">Deleted:</h3>
                                             <h3>${employee.getDeletedAt()}</h3>
                                         </div>
+                                </c:if>
+                            <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt() != null}"> 
+                                <div class="topContainer">
+                                    <div class="dateContainer">
+                                        <h3 class="title">Updated:</h3>
+                                        <h3>${employee.getUpdatedAt()}</h3>
+                                    </div>
+                                    <div class="dateContainer">
+                                        <h3 class="title">Deleted:</h3>
+                                        <h3>${employee.getDeletedAt()}</h3>
                                     </div>
                                 </c:if>
-                            </div>
+                            
 
                             <div class="modal-footer">	
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
