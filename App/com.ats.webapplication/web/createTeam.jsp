@@ -19,6 +19,10 @@
                 <option>
                     Select 1st Team Member
                 </option>
+                <c:forEach var="employee" items="${vm.employees}">
+                    <option value="${employee.getId()}">${employee.getFullName()}
+                    </option>
+                </c:forEach>  
             </select>
             <select class="form-control" name="member2">
                 <option>
@@ -32,15 +36,6 @@
             <div class="form-check">
                 <input type="checkbox" class="checkbox" name="onCall" id="onCall">
                 <label class="form-check-label" for="onCall">On Call</label>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Create</button>
-            <div>
-                <select name="member1">
-                    <option value="categoryID">
-                        
-                    </option>
-                </select>
             </div>
             <button type="submit" class="btn btn-primary submitButton">Create</button>
         </form>
