@@ -241,3 +241,22 @@ BEGIN
     
     SET JobID = LAST_INSERT_ID();
 END$$
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `ats`.`TeamMember_Insert`;
+
+DELIMITER $$
+
+CREATE PROCEDURE `TeamMember_Insert`(
+IN TeamID INT,
+IN EmployeeID INT
+)
+BEGIN
+INSERT INTO `ats`.`teammembers`
+(`TeamID`, `EmployeeID`)
+VALUES
+(TeamID, EmployeeID);
+END$$
+
+DELIMITER ;
