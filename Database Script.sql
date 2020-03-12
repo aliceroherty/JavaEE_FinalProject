@@ -12,8 +12,7 @@ CREATE TABLE `ats`.`employees` (
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NULL,
   `DeletedAt` DATETIME NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE INDEX `SIN_UNIQUE` (`SIN` ASC));
+  PRIMARY KEY (`ID`));
 
 CREATE TABLE `ats`.`tasks` (
   `ID` INT NOT NULL AUTO_INCREMENT,

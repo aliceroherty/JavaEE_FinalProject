@@ -38,6 +38,7 @@ public class EmployeesController extends CommonController {
                     
                     request.setAttribute("vm", vm);
                     super.setView(request, EMPLOYEES);
+                    super.getView().forward(request, response);
                     break;
                 case "createEmployee":
                     super.setView(request, CREATE_EMPLOYEE);
@@ -71,11 +72,12 @@ public class EmployeesController extends CommonController {
                         
                         request.setAttribute("vm", vm);
                         
-                        if (vm.getEmployees().size() == 0) {
+                        if (vm.getEmployees().isEmpty()) {
                             request.setAttribute("message", "No Results");
                         }
                         
                         super.setView(request, EMPLOYEES);
+                        super.getView().forward(request, response);
                         break;
                     case "createEmployee":
                         IEmployee employee = setEmployee(request);
@@ -90,11 +92,19 @@ public class EmployeesController extends CommonController {
                         }
 
                         super.setView(request, CREATE_EMPLOYEE);
+                        super.getView().forward(request, response);
+                        break;
+                    case "deleteEmployee":
+                        int id = getInteger(request, "id");
+                        int rowsAffected = 0;
+                        if (id != 0) {
+                            rowsAffected = service.deleteEmployee(id);
+                        }
+                        
+                        System.out.println(rowsAffected);
                         break;
                 }
             }
-
-            super.getView().forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

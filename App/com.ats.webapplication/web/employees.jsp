@@ -13,8 +13,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%@include file="WEB-INF/jspf/head.jspf" %>
     <body>
+        <%@include file="WEB-INF/jspf/head.jspf" %>
         <%@include file="WEB-INF/jspf/nav.jspf" %>
         <h1 class="mt-3">Employees</h1>
         <form class="searchForm" method="post">
@@ -22,29 +22,29 @@
             <button type="submit" class="btn btn-outline-primary"><span><i class="fas fa-search"></i></span></button>
         </form>
         <c:if test="${message != null}">
-            <h3 class="text-center">${message}</h3>
+            <h3 id="message" class="text-center">${message}</h3>
         </c:if>
         <div class="employeeContainer">
             <c:if test="${vm.getEmployees().size() > 0}">
-                <c:forEach var="employee" items="${vm.employees}">
+                <c:forEach var="employee" items="${vm.getEmployees()}">
                     <a data-toggle="modal" data-target="#employee${employee.getId()}"/>
-                    <div class="card">
-                        <div class="card-body">
-                            <h1><c:out value="${employee.getFirstName()} ${employee.getLastName()}"/></h1>
+                        <div class="card">
+                            <div class="card-body">
+                                <h1><c:out value="${employee.getFirstName()} ${employee.getLastName()}"/></h1>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </c:forEach>
-        </c:if>
-    </div>
+                    </a>
+                </c:forEach>
+            </c:if>
+        </div>
     <c:if test="${vm.getEmployees().size() > 0}">
-        <c:forEach var="employee" items="${vm.getEmployees()}">                 
+        <c:forEach var="employee" items="${vm.getEmployees()}">           
             <div class="modal fade" id="employee${employee.getId()}" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <c:choose>
-                                <c:when test="${employee.isDeleted() == true}">
+                                <c:when test="${employee.isDeleted()}">
                                     <h1 class="modal-title" id="exampleModalLongTitle">
                                         ${employee.getFirstName()} ${employee.getLastName()} - Deleted
                                     </h1>
@@ -74,8 +74,8 @@
                                 <div id="rateContainer">
                                     <h3 class="title">Hourly Rate:</h3>
                                     <h3>
-                                        <fmt:setLocale value = "en_US"/>
-                                        <fmt:formatNumber value = "${employee.getHourlyRate()}" type = "currency"/>    
+                                        <fmt:setLocale value="en_US"/>
+                                        <fmt:formatNumber value="${employee.getHourlyRate()}" type = "currency"/>    
                                     </h3>
                                 </div>
                                 <div class="dateContainer">
@@ -95,34 +95,28 @@
                                 <h3 class="title">Hourly Rate:</h3>
                                 <h3>${employee.getHourlyRate()}</h3>
                             </div>
-                            <c:if test="${employee.isDeleted() == true}">
-                            <div id="descriptionContainer">
-                                <h3 class="title">Deleted:</h3>
-                                <h3>Yes</h3>
+                                <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt()}"> 
+                                    <div class="topContainer">
+                                        <div class="dateContainer">
+                                            <h3 class="title">Updated:</h3>
+                                            <h3>${employee.getUpdatedAt()}</h3>
+                                        </div>
+                                        <div class="dateContainer">
+                                            <h3 class="title">Deleted:</h3>
+                                            <h3>${employee.getDeletedAt()}</h3>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </div>
-                            <c:if test="${employee.getUpdatedAt() != null || employee.getDeletedAt()}"> 
-                                <div class="topContainer">
-                                    <div class="dateContainer">
-                                        <h3 class="title">Updated:</h3>
-                                        <h3>${employee.getUpdatedAt()}</h3>
-                                    </div>
-                                    <div class="dateContainer">
-                                        <h3 class="title">Deleted:</h3>
-                                        <h3>${employee.getDeletedAt()}</h3>
-                                    </div>
-                                </div>
-                            </c:if>
-                        </div>
 
-                        <div class="modal-footer">	
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
-                            <button type="button" class="btn btn-primary">Update</button>	
-                            <button type="button" class="btn btn-danger">Delete</button>	
+                            <div class="modal-footer">	
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+                                <button type="button" class="btn btn-primary">Update</button>	
+                                <button type="button" class="btn btn-danger" onclick="deleteEmployee(${employee.getId()})">Delete</button>	
+                            </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
         </c:forEach>
     </c:if>
 </body>

@@ -14,4 +14,5 @@ public interface IEmployeeRepo {
     int deleteEmployee(int id);
     List<IEmployee> getEmployees();
     IEmployee getEmployee(int id);
+    int getNumberOfTeams(int id);
 }

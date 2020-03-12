@@ -59,7 +59,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         returnParams = db.executeNonQuery("CALL Team_Insert(?,?,?,?,?,?,?);", params);
 
         try {
-            if (returnParams != null && returnParams.size() != 0) {
+            if (returnParams != null && !returnParams.isEmpty()) {
                 id = Integer.parseInt(returnParams.get(0).toString());
             }
         } catch (Exception e) {

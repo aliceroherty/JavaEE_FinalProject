@@ -5,13 +5,19 @@ TRUNCATE teammembers;
 DELETE FROM employees;
 DELETE FROM tasks;
 
+CALL Team_Insert(@teamID, "Team 1", 0, SYSDATE(), NULL, 0, NULL);
+
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("John", "Doe", 123456789, 15.25, false, sysdate(), NULL, NULL);
 
+CALL TeamMember_Insert(LAST_INSERT_ID(), @teamID);
+
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Jane", "Doe", 987654321, 17.25, false, sysdate(), NULL, NULL);
+
+CALL TeamMember_Insert(LAST_INSERT_ID(), @teamID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 

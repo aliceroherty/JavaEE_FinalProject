@@ -16,4 +16,5 @@ public interface IEmployeeService {
     IEmployee getEmployee(int id);
     boolean isValid(IEmployee employee);
     List<IEmployee> searchEmployees(String searchText);
+    int getNumberOfTeams(int id);
 }

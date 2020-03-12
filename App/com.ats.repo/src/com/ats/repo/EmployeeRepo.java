@@ -57,7 +57,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         returnParams = db.executeNonQuery("CALL Employee_Insert(?, ?, ?, ?, ?, ?, ?, ?, ?);", params);
         
         try {
-            if (returnParams != null && returnParams.size() != 0) {
+            if (returnParams != null && !returnParams.isEmpty()) {
                 id = Integer.parseInt(returnParams.get(0).toString());
             }
         } catch (Exception e) {
@@ -69,12 +69,52 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
 
     @Override
     public int updateEmployee(IEmployee employee) {
-        return 0;
+        int rowsAffected = 0;
+        List<Object> returnValues;
+        List<IParameter> params = ParameterFactory.createListInstance();
+        
+        params.add(ParameterFactory.createInstance(employee.getId()));
+        params.add(ParameterFactory.createInstance(employee.getFirstName()));
+        params.add(ParameterFactory.createInstance(employee.getLastName()));
+        params.add(ParameterFactory.createInstance(employee.getHourlyRate()));
+        params.add(ParameterFactory.createInstance(employee.getSIN()));
+        params.add(ParameterFactory.createInstance(employee.isDeleted()));
+        params.add(ParameterFactory.createInstance(employee.getCreatedAt()));
+        params.add(ParameterFactory.createInstance(employee.getUpdatedAt()));
+        params.add(ParameterFactory.createInstance(employee.getDeletedAt()));
+        
+        returnValues = db.executeNonQuery("CALL Employee_Update(?, ?, ?, ?, ?, ?, ?, ?, ?);", params);
+        
+        try {
+            if (returnValues != null) {
+                rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return rowsAffected;
     }
 
     @Override
     public int deleteEmployee(int id) {
-        return 0;
+        int rowsAffected = 0;
+        List<Object> returnValues;
+        
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(id));
+        
+        returnValues = db.executeNonQuery("CALL Employee_Delete(?);", params);
+        
+        try {
+            if (returnValues != null && !returnValues.isEmpty()) {
+                rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return rowsAffected;
     }
 
     /**
@@ -104,7 +144,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
                 employees.add(employee);
             }
         } catch (Exception ex) {
-            
+            System.out.println(ex.getMessage());
         }
         
         return employees;
@@ -112,7 +152,43 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
 
     @Override
     public IEmployee getEmployee(int id) {
-        return EmployeeFactory.createInstance();
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(id));
+        CachedRowSet results = db.executeFill("CALL Employee_GetByID(?);",params);
+        IEmployee employee = EmployeeFactory.createInstance();
+        
+        try {
+            if (results.next()) {                
+                employee.setId(getInt("ID", results));
+                employee.setFirstName(getString("FirstName", results));
+                employee.setLastName(getString("LastName", results));
+                employee.setSIN(getInt("SIN", results));
+                employee.setHourlyRate(getDouble("HourlyRate", results));
+                employee.setDeleted(getBoolean("isDeleted", results));
+                employee.setCreatedAt(getDate("CreatedAt", results));
+                employee.setUpdatedAt(getDate("UpdatedAt", results));
+                employee.setDeletedAt(getDate("DeletedAt", results));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return employee;
+    }
+
+    @Override
+    public int getNumberOfTeams(int id) {
+        int numTeams = 0;
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(id));
+        
+        try {
+            numTeams = Integer.parseInt(db.executeScalar("CALL Employee_GetNumberOfTeams(?);", params).toString());
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return numTeams;
     }
     
 }

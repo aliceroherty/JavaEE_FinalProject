@@ -3,6 +3,7 @@ package com.ats.service;
 import com.ats.models.IEmployee;
 import com.ats.repo.IEmployeeRepo;
 import com.ats.repo.RepoFactory;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,12 +24,21 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public int updateEmployee(IEmployee employee) {
+        employee.setUpdatedAt(new Date());
         return repo.updateEmployee(employee);
     }
 
     @Override
     public int deleteEmployee(int id) {
-        return repo.deleteEmployee(id);
+        int numTeams = getNumberOfTeams(id);
+        if (numTeams != 0) {
+            IEmployee employee = getEmployee(id);
+            employee.setDeleted(true);
+            employee.setDeletedAt(new Date());
+            return repo.updateEmployee(employee);
+        } else {
+            return repo.deleteEmployee(id);
+        }
     }
 
     @Override
@@ -58,6 +68,11 @@ public class EmployeeService implements IEmployeeService {
         }
 
         return results;
+    }
+
+    @Override
+    public int getNumberOfTeams(int id) {
+        return repo.getNumberOfTeams(id);
     }
 
 }
