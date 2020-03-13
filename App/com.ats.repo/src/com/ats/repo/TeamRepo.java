@@ -71,7 +71,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
                     teamMemberParams.add(ParameterFactory.createInstance(team.getId()));
                     teamMemberParams.add(ParameterFactory.createInstance(id));
                     
-                    db.executeNonQuery("CALL TeamMember_Insert(?, ?);", params);
+                    db.executeNonQuery("CALL TeamMember_Insert(?, ?);", teamMemberParams);
                 }
             }
         } catch (Exception e) {
