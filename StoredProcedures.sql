@@ -187,7 +187,7 @@ BEGIN
 END$$
 
 DELIMITER ;
-DROP PROCEDURE IF EXISTS `Tasks_GetTaskemployees`;
+DROP PROCEDURE IF EXISTS `JobTasks_Insert`;
 
 DELIMITER $$
 CREATE PROCEDURE `JobTasks_Insert`(
@@ -260,3 +260,34 @@ VALUES
 END$$
 
 DELIMITER ;
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_GetTeamMembers`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_GetTeamMembers`(IN TeamID INT)
+BEGIN
+	SELECT 
+		employees.ID, 
+        employees.FirstName, 
+        employees.LastName, 
+        employees.SIN, 
+        employees.HourlyRate, 
+        employees.isDeleted, 
+        employees.CreatedAt, 
+        employees.UpdatedAt, 
+        employees.DeletedAt 
+    FROM 
+		teammembers 
+	INNER JOIN employees 
+		ON teammembers.EmployeeID = employees.ID AND teammembers.TeamID = TeamID;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_GetAll`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_GetAll`()
+BEGIN
+	SELECT * FROM teams;
+END$$

@@ -9,10 +9,15 @@ import com.ats.dataaccess.DALFactory;
 import com.ats.dataaccess.IDAL;
 import com.ats.dataaccess.IParameter;
 import com.ats.dataaccess.ParameterFactory;
+import com.ats.models.EmployeeFactory;
 import com.ats.models.IEmployee;
 import com.ats.models.ITeam;
+import com.ats.models.TeamFactory;
+import java.sql.ResultSetMetaData;
 import java.sql.Types;
 import java.util.List;
+import javax.sql.RowSetMetaData;
+import javax.sql.rowset.CachedRowSet;
 
 /**
  * Team Repository Class
@@ -86,6 +91,68 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
     @Override
     public int deleteTeam(int id) {
         return 0;
+    }
+
+    @Override
+    public List<ITeam> getTeams() {
+        List<ITeam> teams = TeamFactory.createListInstance();
+        
+        CachedRowSet results = db.executeFill("CALL Team_GetAll();", ParameterFactory.createListInstance());
+        
+        try {
+            while (results.next()) {
+                ResultSetMetaData data = results.getMetaData();
+                
+                ITeam team = TeamFactory.createInstance(
+                    getInt("ID", results),
+                    getString("Name", results),
+                    getBoolean("IsOnCall", results),
+                    getDate("CreatedAt", results),
+                    getDate("UpdatedAt", results),
+                    getBoolean("IsDeleted", results),
+                    getDate("DeletedAt", results),
+                    getTeamMembers(getInt("ID", results))
+                );
+                
+                teams.add(team);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return teams;
+    }
+
+    @Override
+    public List<IEmployee> getTeamMembers(int teamID) {
+        List<IEmployee> employees = EmployeeFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(teamID));
+
+        CachedRowSet results = db.executeFill("CALL Team_GetTeamMembers(?);", params);
+
+        try {
+            if (results.next()) {
+                IEmployee employee = EmployeeFactory.createInstance(
+                        getInt("ID", results),
+                        getString("FirstName", results),
+                        getString("LastName", results),
+                        getInt("SIN", results),
+                        getDouble("HourlyRate", results),
+                        getDate("CreatedAt", results),
+                        getBoolean("isDeleted", results),
+                        getDate("UpdatedAt", results),
+                        getDate("DeletedAt", results)
+                );
+                
+                employees.add(employee);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return employees;
     }
 
 }

@@ -24,6 +24,10 @@ public abstract class TeamFactory {
     public static ITeam createInstance(String name, boolean isOnCall, Date createdAt, Date updatedAt, boolean isDeleted, Date deletedAt, List<IEmployee> employees) {
         return new Team(name, isOnCall, createdAt, updatedAt, isDeleted, deletedAt, employees);
     }
+    
+    public static ITeam createInstance(int id, String name, boolean isOnCall, Date createdAt, Date updatedAt, boolean isDeleted, Date deletedAt, List<IEmployee> employees) {
+        return new Team(id, name, isOnCall, createdAt, updatedAt, isDeleted, deletedAt, employees);
+    }
 
     public static List<ITeam> createListInstance() {
         return new ArrayList<>();

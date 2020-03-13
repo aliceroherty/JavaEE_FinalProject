@@ -18,6 +18,10 @@ public abstract class EmployeeFactory {
         return new Employee(firstName, lastName, sin, hourlyRate, createdAt, isDeleted);
     }
     
+    public static IEmployee createInstance(int id, String firstName, String lastName, int sin, double hourlyRate, Date createdAt, boolean isDeleted, Date updatedAt, Date deletedAt) {
+        return new Employee(id, firstName, lastName, sin, hourlyRate, createdAt, isDeleted, updatedAt, deletedAt);
+    }
+    
     public static List<IEmployee> createListInstance() {
         return new ArrayList<>();
     }

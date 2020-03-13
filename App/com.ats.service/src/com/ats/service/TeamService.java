@@ -5,6 +5,7 @@
  */
 package com.ats.service;
 
+import com.ats.models.IEmployee;
 import com.ats.models.ITeam;
 import com.ats.repo.ITeamRepo;
 import com.ats.repo.RepoFactory;
@@ -37,10 +38,14 @@ public class TeamService implements ITeamService {
     public boolean isValid(ITeam team) {
         return team.getErrors().size() > 0;
     }
-    
+
     @Override
-    public List<ITeam> GetTeams(){
-        //chris said do this because its not implimented till later userstories.
-        return null;  
+    public List<ITeam> getTeams() {
+        return repo.getTeams();
+    }
+
+    @Override
+    public List<IEmployee> getTeamMembers(int teamID) {
+        return repo.getTeamMembers(teamID);
     }
 }

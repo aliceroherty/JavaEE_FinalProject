@@ -52,7 +52,7 @@ public class TeamController extends CommonController {
         }
         else
         {
-            service.GetTeams();
+            service.getTeams();
         }
         
         

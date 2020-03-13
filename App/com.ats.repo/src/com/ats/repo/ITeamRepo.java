@@ -1,5 +1,6 @@
 package com.ats.repo;
 
+import com.ats.models.IEmployee;
 import com.ats.models.ITeam;
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface ITeamRepo {
     int insertTeam(ITeam team);
     int updateTeam(ITeam team);
     int deleteTeam(int id);
+    List<ITeam> getTeams();
+    List<IEmployee> getTeamMembers(int teamID);
 }

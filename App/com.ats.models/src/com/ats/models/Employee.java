@@ -40,6 +40,19 @@ public class Employee extends Base implements IEmployee {
         this.createdAt = createdAt;
         this.isDeleted = isDeleted;
     }
+    
+    public Employee(int id, String firstName, String lastName, int sin, double hourlyRate, Date createdAt, boolean isDeleted, Date updatedAt, Date deletedAt) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sin = sin;
+        this.hourlyRate = hourlyRate;
+        this.createdAt = createdAt;
+        this.isDeleted = isDeleted;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+    }
 
     @Override
     public int getId() {

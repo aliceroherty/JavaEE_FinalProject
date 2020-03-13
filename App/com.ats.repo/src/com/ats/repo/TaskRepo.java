@@ -103,7 +103,7 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
         List<IParameter> params = ParameterFactory.createListInstance();
         params.add(ParameterFactory.createInstance(id, Direction.IN, Types.INTEGER));
 
-        CachedRowSet results = db.executeFill("Tasks_GetTask", params);
+        CachedRowSet results = db.executeFill("CALL Tasks_GetTask(?);", params);
 
         try {
             if (results.next()) {
