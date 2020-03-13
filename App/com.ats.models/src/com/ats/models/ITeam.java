@@ -6,6 +6,7 @@
 package com.ats.models;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Team Interface
@@ -41,4 +42,8 @@ public interface ITeam extends IBase {
     public Date getDeletedAt();
 
     public void setDeletedAt(Date deletedAt);
+    
+    public List<IEmployee> getEmployees();
+    
+    public void setEmployees(List<IEmployee> employee);
 }

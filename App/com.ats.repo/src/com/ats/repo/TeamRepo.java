@@ -9,6 +9,7 @@ import com.ats.dataaccess.DALFactory;
 import com.ats.dataaccess.IDAL;
 import com.ats.dataaccess.IParameter;
 import com.ats.dataaccess.ParameterFactory;
+import com.ats.models.IEmployee;
 import com.ats.models.ITeam;
 import java.sql.Types;
 import java.util.List;
@@ -61,6 +62,15 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         try {
             if (returnParams != null && !returnParams.isEmpty()) {
                 id = Integer.parseInt(returnParams.get(0).toString());
+                
+                for(IEmployee employee : team.getEmployees()){
+                    List<IParameter> teamMemberParams = ParameterFactory.createListInstance();
+                    
+                    teamMemberParams.add(ParameterFactory.createInstance(team.getId()));
+                    teamMemberParams.add(ParameterFactory.createInstance(id));
+                    
+                    db.executeNonQuery("CALL TeamMember_Insert(?, ?);", params);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
