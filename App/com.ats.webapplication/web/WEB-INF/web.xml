@@ -62,4 +62,14 @@
         <servlet-name>TeamController</servlet-name>
         <url-pattern>/createTeam</url-pattern>
     </servlet-mapping>
+    
+    <!-- Setting up Jobs Controller -->
+    <servlet>
+        <servlet-name>JobsController</servlet-name>
+        <servlet-class>com.ats.controllers.JobsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JobsController</servlet-name>
+        <url-pattern>/createJob</url-pattern>
+    </servlet-mapping>
 </web-app>

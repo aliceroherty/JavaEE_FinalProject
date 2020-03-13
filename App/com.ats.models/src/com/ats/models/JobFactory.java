@@ -14,8 +14,8 @@ public abstract class JobFactory {
         return new Job();
     }
     
-    public static IJob createInstance(int id, String description, String clientName, double cost, double revenue, Date startTime, Date endTime, List<ITask> tasks) {
-        return new Job(id, description, clientName, cost, revenue, startTime, endTime, tasks);
+    public static IJob createInstance(int id, String description, String clientName, double cost, double revenue, Date startTime, Date endTime, List<ITask> tasks, ITeam team) {
+        return new Job(id, description, clientName, cost, revenue, startTime, endTime, tasks, team);
     }
     
     public static List<IJob> createListInstance() {
