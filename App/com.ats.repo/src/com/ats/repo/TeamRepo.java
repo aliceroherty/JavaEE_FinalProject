@@ -36,7 +36,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         List<Object> returnParams;
         List<IParameter> params = ParameterFactory.createListInstance();
 
-        IParameter idParam = ParameterFactory.createInstance(id, IParameter.Direction.OUT, Types.INTEGER);
+        IParameter idParam = ParameterFactory.createInstance(id, IParameter.Direction.IN, Types.INTEGER);
         params.add(idParam);
 
         IParameter name = ParameterFactory.createInstance(team.getName(), IParameter.Direction.IN, Types.VARCHAR);
@@ -61,7 +61,9 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
 
         try {
             if (returnParams != null && !returnParams.isEmpty()) {
-                id = Integer.parseInt(returnParams.get(0).toString());
+              
+                id = Integer.parseInt(returnParams.get(0).toString());              
+               
                 
                 for(IEmployee employee : team.getEmployees()){
                     List<IParameter> teamMemberParams = ParameterFactory.createListInstance();
