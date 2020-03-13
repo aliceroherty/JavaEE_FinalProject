@@ -21,8 +21,8 @@ public abstract class TeamFactory {
         return new Team();
     }
 
-    public static ITeam createInstance(String name, boolean isOnCall, Date createdAt, Date updatedAt, boolean isDeleted, Date deletedAt) {
-        return new Team(name, isOnCall, createdAt, updatedAt, isDeleted, deletedAt);
+    public static ITeam createInstance(String name, boolean isOnCall, Date createdAt, Date updatedAt, boolean isDeleted, Date deletedAt, List<IEmployee> employees) {
+        return new Team(name, isOnCall, createdAt, updatedAt, isDeleted, deletedAt, employees);
     }
 
     public static List<ITeam> createListInstance() {

@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ats.models.EmployeeFactory;
 
 /**
  *
@@ -103,12 +104,20 @@ public class TeamController extends CommonController {
     }
 
     private ITeam setTeam(HttpServletRequest request) {
+        IEmployeeService employeeService = ServiceFactory.createEmployeeInstance();
+        
         String name = super.getValue(request, "name");
         boolean isOnCall = super.getBoolean(request, "onCall");
         Date createdAt = new Date();
         Date updatedAt = null;
         boolean isDeleted = false;
         Date deletedAt = null;
-        return TeamFactory.createInstance(name, isOnCall, createdAt, updatedAt, isDeleted, deletedAt);
+        List<IEmployee> employees = EmployeeFactory.createListInstance();
+        
+        employees.add(employeeService.getEmployee(getInteger(request, "member1")));
+        employees.add(employeeService.getEmployee(getInteger(request, "member2")));
+        
+        
+        return TeamFactory.createInstance(name, isOnCall, createdAt, updatedAt, isDeleted, deletedAt, employees);
     }
 }
