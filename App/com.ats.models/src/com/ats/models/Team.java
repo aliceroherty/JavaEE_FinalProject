@@ -26,6 +26,18 @@ public class Team extends Base implements ITeam {
         this.employees = employees;
         
     }
+    
+    public Team(int id, String name, boolean isOnCall, Date createdAt, Date updatedAt, boolean isDeleted, Date deletedAt, List<IEmployee> employees ) {
+        this.id = id;
+        this.name = name;
+        this.isOnCall = isOnCall;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isDeleted = isDeleted;
+        this.deletedAt = deletedAt;
+        this.employees = employees;
+        
+    }
 
     private int id;
     private String name;

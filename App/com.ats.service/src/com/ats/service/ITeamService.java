@@ -5,6 +5,7 @@
  */
 package com.ats.service;
 
+import com.ats.models.IEmployee;
 import com.ats.models.ITeam;
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface ITeamService {
     int updateTeam(ITeam employee);
     int deleteTeam(int id);
     boolean isValid(ITeam team);
-    List<ITeam> GetTeams();
+    List<ITeam> getTeams();
+    List<IEmployee> getTeamMembers(int teamID);
 }
