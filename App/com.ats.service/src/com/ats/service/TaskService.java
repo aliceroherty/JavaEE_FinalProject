@@ -7,10 +7,12 @@ import java.util.List;
 
 /**
  * Task Service Class
+ *
  * @author Alice Roherty-Carrier
  * @date 03-04-2020
  */
 public class TaskService implements ITaskService {
+
     private ITaskRepo repo = RepoFactory.createTaskInstance();
 
     @Override
@@ -25,7 +27,11 @@ public class TaskService implements ITaskService {
 
     @Override
     public int deleteTask(int id) {
-        return repo.deleteTask(id);
+        if (id != 0) {
+            return repo.deleteTask(id);
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -37,10 +43,10 @@ public class TaskService implements ITaskService {
     public ITask getTask(int id) {
         return repo.getTask(id);
     }
-    
+
     @Override
     public boolean isValid(ITask task) {
         return task.getErrors().size() > 0;
     }
-    
+
 }
