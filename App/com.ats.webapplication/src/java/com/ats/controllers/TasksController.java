@@ -77,6 +77,15 @@ public class TasksController extends CommonController {
                             request.setAttribute("message", "Task Created Successfully");
                         }
                         break;
+                    case "deleteTask":
+                        int id = getInteger(request, "id");
+                        int rowsAffected = 0;
+                        if (id != 0) {
+                            rowsAffected = service.deleteTask(id);
+                        }
+
+                        System.out.println(rowsAffected);
+                        break;
 
                 }
             }

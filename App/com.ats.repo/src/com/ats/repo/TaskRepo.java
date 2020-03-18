@@ -59,7 +59,22 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
 
     @Override
     public int deleteTask(int id) {
-        return 0;
+        int rowsAffected = 0;
+
+        List<Object> returnValues;
+        List<IParameter> params = ParameterFactory.createListInstance();
+
+        params.add(ParameterFactory.createInstance(id));
+
+        returnValues = db.executeNonQuery("CALL Task_Delete(?)", params);
+
+        try {
+            rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return rowsAffected;
     }
 
     /**
