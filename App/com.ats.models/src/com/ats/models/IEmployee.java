@@ -21,8 +21,6 @@ public interface IEmployee extends IBase {
 
     public void setLastName(String lastName);
     
-    public String getFullName();
-
     public int getSIN();
 
     public void setSIN(int sin);

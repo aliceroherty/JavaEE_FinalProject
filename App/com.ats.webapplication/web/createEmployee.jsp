@@ -11,7 +11,14 @@
     <%@include file="WEB-INF/jspf/head.jspf" %>
     <body id="createEmployee">
         <%@include file="WEB-INF/jspf/nav.jspf" %>
-        <h1 class="mt-3">Create Employee</h1>
+        <h1 class="mt-3 mb-0">Create Employee</h1>
+        <c:if test="${errors != null && errors.size() > 0}">
+            <ul class="alert alert-danger mx-auto px-5 mt-3">
+                <c:forEach items="${errors}" var="error">
+                    <li><c:out value="${error.getDescription()}"/></li>
+                </c:forEach>
+            </ul>
+        </c:if>
         <form method="POST" class="mx-auto mt-4">
             <input type="text" name="firstName" placeholder="First Name" class="form-control text-center"/>
             <input type="text" name="lastName" placeholder="Last Name" class="form-control text-center"/>
@@ -22,5 +29,6 @@
         <c:if test="${message != null}">
             <h2><c:out value="${message}"/></h2>
         </c:if>
+        
     </body>
 </html>

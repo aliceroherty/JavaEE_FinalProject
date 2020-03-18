@@ -1,6 +1,7 @@
 package com.ats.repo;
 
 import com.ats.models.IJob;
+import com.ats.models.ITask;
 import java.util.List;
 
 /**
@@ -13,4 +14,5 @@ public interface IJobRepo {
     int updateJob(IJob job);
     int deleteJob(int id);
     List<IJob> getJobs();
+    List<ITask> getTasks(int jobID);
 }

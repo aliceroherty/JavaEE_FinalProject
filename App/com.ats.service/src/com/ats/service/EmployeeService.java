@@ -1,6 +1,8 @@
 package com.ats.service;
 
+import com.ats.models.ErrorFactory;
 import com.ats.models.IEmployee;
+import com.ats.models.ITask;
 import com.ats.repo.IEmployeeRepo;
 import com.ats.repo.RepoFactory;
 import java.util.Date;
@@ -19,7 +21,25 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public int insertEmployee(IEmployee employee) {
-        return repo.insertEmployee(employee);
+        if (employee.getFirstName().equals("")) {
+            addError(employee, "First Name is required.");
+        } 
+        
+        if (employee.getLastName().equals("")) {
+            addError(employee, "Last Name is required.");
+        }
+        
+        if (employee.getSIN() == 0) {
+            addError(employee, "SIN is required.");
+        } else if (Integer.toString(employee.getSIN()).length() != 9) {
+            addError(employee, "SIN must be 9 digits.");
+        }
+        
+        if (employee.getHourlyRate() == 0) {
+            addError(employee, "Hourly Rate is required.");
+        }
+        
+        return isValid(employee) ? repo.insertEmployee(employee) : 0;        
     }
 
     @Override
@@ -53,7 +73,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public boolean isValid(IEmployee employee) {
-        return employee.getErrors().size() > 0;
+        return employee.getErrors().size() == 0;
     }
 
     @Override
@@ -75,4 +95,13 @@ public class EmployeeService implements IEmployeeService {
         return repo.getNumberOfTeams(id);
     }
 
+    @Override
+    public void addError(IEmployee employee, String message) {
+        employee.addError(ErrorFactory.createInstance(message));
+    }
+
+    @Override
+    public List<ITask> getSkills(int employeeID) {
+        return repo.getSkills(employeeID);
+    }
 }

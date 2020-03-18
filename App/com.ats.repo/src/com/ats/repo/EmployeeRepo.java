@@ -3,6 +3,8 @@ package com.ats.repo;
 import com.ats.models.IEmployee;
 import com.ats.dataaccess.*;
 import com.ats.models.EmployeeFactory;
+import com.ats.models.ITask;
+import com.ats.models.TaskFactory;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +142,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
                 employee.setCreatedAt(getDate("CreatedAt", results));
                 employee.setUpdatedAt(getDate("UpdatedAt", results));
                 employee.setDeletedAt(getDate("DeletedAt", results));
+                employee.setSkills(getSkills(getInt("ID", results)));
                 
                 employees.add(employee);
             }
@@ -168,6 +171,7 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
                 employee.setCreatedAt(getDate("CreatedAt", results));
                 employee.setUpdatedAt(getDate("UpdatedAt", results));
                 employee.setDeletedAt(getDate("DeletedAt", results));
+                employee.setSkills(getSkills(getInt("ID", results)));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -189,6 +193,33 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         }
         
         return numTeams;
+    }
+
+    @Override
+    public List<ITask> getSkills(int employeeID) {
+        List<ITask> skills = TaskFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(employeeID));
+
+        CachedRowSet results = db.executeFill("CALL Employee_GetSkills(?);", params);
+
+        try {
+            while (results.next()) {
+                ITask skill = TaskFactory.createInstance(
+                    getInt("ID", results),
+                    getString("Name", results),
+                    getString("Description", results),
+                    getInt("Duration", results)
+                );
+                
+                skills.add(skill);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return skills;
     }
     
 }

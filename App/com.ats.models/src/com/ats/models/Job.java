@@ -21,6 +21,17 @@ public class Job extends Base implements IJob {
     
     public Job() {}
     
+    public Job(String description, String clientName, double cost, double revenue, Date startTime, Date endTime, List<ITask> tasks, ITeam team) {
+        this.description = description;
+        this.clientName = clientName;
+        this.cost = cost;
+        this.revenue = revenue;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.tasks = tasks;
+        this.team = team;
+    }
+    
     public Job(int id, String description, String clientName, double cost, double revenue, Date startTime, Date endTime, List<ITask> tasks, ITeam team) {
         this.id = id;
         this.description = description;

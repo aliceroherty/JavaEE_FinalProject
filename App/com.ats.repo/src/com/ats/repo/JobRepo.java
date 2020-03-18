@@ -7,8 +7,10 @@ import com.ats.dataaccess.ParameterFactory;
 import com.ats.models.IJob;
 import com.ats.models.ITask;
 import com.ats.models.JobFactory;
+import com.ats.models.TaskFactory;
 import java.sql.Types;
 import java.util.List;
+import javax.sql.rowset.CachedRowSet;
 
 /**
  * Job Repository Class
@@ -19,6 +21,7 @@ import java.util.List;
 public class JobRepo extends BaseRepo implements IJobRepo {
 
     private IDAL db = DALFactory.createInstance();
+    private ITeamRepo teamRepo = RepoFactory.createTeamInstance();
 
     @Override
     public int insertJob(IJob job) {
@@ -43,8 +46,8 @@ public class JobRepo extends BaseRepo implements IJobRepo {
 
                 for (ITask task : job.getTasks()) {
                     List<IParameter> jobTaskParams = ParameterFactory.createListInstance();
-
-                    jobTaskParams.add(ParameterFactory.createInstance(task.getId()));
+                    int taskId = task.getId();
+                    jobTaskParams.add(ParameterFactory.createInstance(taskId));
                     jobTaskParams.add(ParameterFactory.createInstance(id));
                     
                     db.executeNonQuery("CALL JobTasks_Insert(?, ?);", jobTaskParams);
@@ -69,7 +72,58 @@ public class JobRepo extends BaseRepo implements IJobRepo {
 
     @Override
     public List<IJob> getJobs() {
-        return JobFactory.createListInstance();
+        List<IJob> jobs = JobFactory.createListInstance();
+        
+        CachedRowSet results = db.executeFill("CALL Jobs_GetAll();", ParameterFactory.createListInstance());
+
+        try {
+            while (results.next()) {
+                IJob job = JobFactory.createInstance(
+                    getInt("ID", results),
+                    getString("Description", results),
+                    getString("ClientName", results),
+                    getDouble("Cost", results),
+                    getDouble("Revenue", results),
+                    getDate("StartTime", results),
+                    getDate("EndTime", results),
+                    getTasks(getInt("ID", results)),
+                    teamRepo.getTeam(getInt("TeamID", results))
+                );
+                
+                jobs.add(job);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return jobs;
+    }
+
+    @Override
+    public List<ITask> getTasks(int jobID) {
+        List<ITask> tasks = TaskFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(jobID));
+
+        CachedRowSet results = db.executeFill("CALL Jobs_GetTasks(?);", params);
+
+        try {
+            while (results.next()) {
+                ITask task = TaskFactory.createInstance(
+                    getInt("ID", results),
+                    getString("Name", results),
+                    getString("Description", results),
+                    getInt("Duration", results)
+                );
+                
+                tasks.add(task);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return tasks;
     }
 
 }

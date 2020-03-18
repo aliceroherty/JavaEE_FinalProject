@@ -21,11 +21,6 @@ public class Employee extends Base implements IEmployee {
     private Date updatedAt;
     private Date deletedAt;
     private List<ITask> skills;
-    private String fullName;
-
-    public String getFullName() {
-        return getFirstName() + " " + getLastName() ;
-    }
 
     public Employee() {
         super();
@@ -52,6 +47,20 @@ public class Employee extends Base implements IEmployee {
         this.isDeleted = isDeleted;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+    
+    public Employee(int id, String firstName, String lastName, int sin, double hourlyRate, Date createdAt, boolean isDeleted, Date updatedAt, Date deletedAt, List<ITask> skills) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sin = sin;
+        this.hourlyRate = hourlyRate;
+        this.createdAt = createdAt;
+        this.isDeleted = isDeleted;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+        this.skills = skills;
     }
 
     @Override

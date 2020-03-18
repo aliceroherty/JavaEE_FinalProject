@@ -12,6 +12,10 @@ public class Error implements IError {
     public Error() {
     }
     
+    public Error(String description) {
+        this.description = description;
+    }
+    
     public Error(int code, String description) {
         this.code = code;
         this.description = description;

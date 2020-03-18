@@ -1,6 +1,7 @@
 package com.ats.service;
 
 import com.ats.models.IEmployee;
+import com.ats.models.ITask;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface IEmployeeService {
     boolean isValid(IEmployee employee);
     List<IEmployee> searchEmployees(String searchText);
     int getNumberOfTeams(int id);
+    void addError(IEmployee employee, String message);
+    List<ITask> getSkills(int employeeID);
 }

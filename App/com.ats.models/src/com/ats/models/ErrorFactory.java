@@ -16,6 +16,10 @@ public abstract class ErrorFactory {
         return new Error(code, description);
     }
     
+    public static IError createInstance(String description) {
+        return new Error(description);
+    }
+    
     public static ArrayList<IError> createListInstance() {
         return new ArrayList<>();
     }

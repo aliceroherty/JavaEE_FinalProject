@@ -1,5 +1,8 @@
 package com.ats.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,6 +75,20 @@ public class CommonController extends HttpServlet {
 
     protected String getValue(HttpServletRequest request, String key) {
         return request.getParameter(key);
+    }
+    
+    protected Date getDate(HttpServletRequest request, String key) {
+        try {
+            Date date = new Date();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+
+            date = df.parse(request.getParameter(key));
+
+            return date;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
 }
