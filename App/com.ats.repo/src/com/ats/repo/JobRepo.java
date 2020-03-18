@@ -125,5 +125,37 @@ public class JobRepo extends BaseRepo implements IJobRepo {
 
         return tasks;
     }
+    
+    @Override
+    public List<IJob> getTeamJobs(int teamID) {
+        List<IJob> jobs = JobFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(teamID));
+
+        CachedRowSet results = db.executeFill("CALL Team_GetJobs(?);", params);
+
+        try {
+            while (results.next()) {
+                IJob job = JobFactory.createInstance(
+                    getInt("ID", results),
+                    getString("Description", results),
+                    getString("ClientName", results),
+                    getDouble("Cost", results),
+                    getDouble("Revenue", results),
+                    getDate("StartTime", results),
+                    getDate("EndTime", results),
+                    getTasks(getInt("ID", results)),
+                    teamRepo.getTeam(teamID)
+                );
+                
+                jobs.add(job);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return jobs;
+    }
 
 }

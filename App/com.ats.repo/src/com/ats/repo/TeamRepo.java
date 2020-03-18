@@ -31,7 +31,6 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
 
     private IDAL db = DALFactory.createInstance();
     private IEmployeeRepo employeeRepo = RepoFactory.createEmployeeInstance();
-    private IJobRepo jobRepo = RepoFactory.createJobInstance();
 
     /**
      * Creates a team.
@@ -186,37 +185,4 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         
         return team;
     }
-
-    @Override
-    public List<IJob> getJobs(int teamID) {
-        List<IJob> jobs = JobFactory.createListInstance();
-
-        List<IParameter> params = ParameterFactory.createListInstance();
-        params.add(ParameterFactory.createInstance(teamID));
-
-        CachedRowSet results = db.executeFill("CALL Team_GetJobs(?);", params);
-
-        try {
-            while (results.next()) {
-                IJob job = JobFactory.createInstance(
-                    getInt("ID", results),
-                    getString("Description", results),
-                    getString("ClientName", results),
-                    getDouble("Cost", results),
-                    getDouble("Revenue", results),
-                    getDate("StartTime", results),
-                    getDate("EndTime", results),
-                    jobRepo.getTasks(getInt("ID", results)),
-                    getTeam(teamID)
-                );
-                
-                jobs.add(job);
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return jobs;
-    }
-
 }

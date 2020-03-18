@@ -20,7 +20,7 @@ import java.util.List;
 public class JobService implements IJobService {
 
     IJobRepo repo = RepoFactory.createJobInstance();
-    ITeamService teamService = ServiceFactory.createTeamInstance();
+    //ITeamService teamService = ServiceFactory.createTeamInstance();
 
     @Override
     public int insertJob(IJob job) {
@@ -70,6 +70,11 @@ public class JobService implements IJobService {
     @Override
     public List<IJob> getJobs() {
         return repo.getJobs();
+    }
+    
+    @Override
+    public List<IJob> getTeamJobs(int teamID) {
+        return repo.getTeamJobs(teamID);
     }
 
     @Override
@@ -144,7 +149,7 @@ public class JobService implements IJobService {
 
     @Override
     public boolean teamIsBooked(IJob job) {
-        ITeam team = job.getTeam();
+        /*ITeam team = job.getTeam();
         List<IJob> teamJobs = teamService.getJobs(team.getId());
         boolean isBooked = false;
         
@@ -162,7 +167,8 @@ public class JobService implements IJobService {
             }
         }
         
-        return isBooked;
+        return isBooked;*/
+        return false;
     }
 
     @Override

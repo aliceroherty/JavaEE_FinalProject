@@ -43,7 +43,6 @@ public class EmployeesController extends CommonController {
 
                     request.setAttribute("vm", vm);
                     super.setView(request, EMPLOYEES);
-                    super.getView().forward(request, response);
                     break;
                 case "createEmployee":
                     super.setView(request, CREATE_EMPLOYEE);
@@ -92,7 +91,6 @@ public class EmployeesController extends CommonController {
                         }
 
                         super.setView(request, EMPLOYEES);
-                        super.getView().forward(request, response);
                         break;
                     case "createEmployee":
                         IEmployee employee = setEmployee(request);
@@ -107,7 +105,6 @@ public class EmployeesController extends CommonController {
                         }
 
                         super.setView(request, CREATE_EMPLOYEE);
-                        super.getView().forward(request, response);
                         break;
                     case "deleteEmployee":
                         int id = getInteger(request, "id");
@@ -118,6 +115,10 @@ public class EmployeesController extends CommonController {
 
                         System.out.println(rowsAffected);
                         break;
+                }
+                
+                if (super.getView() != null) {
+                    super.getView().forward(request, response);
                 }
             }
         } catch (Exception e) {

@@ -15,4 +15,5 @@ public interface IJobRepo {
     int deleteJob(int id);
     List<IJob> getJobs();
     List<ITask> getTasks(int jobID);
+    List<IJob> getTeamJobs(int teamID);
 }

@@ -311,7 +311,7 @@ label{
     margin: 0 5% 2% 5%;
 }
 
-.searchForm input[type=text] {
+.searchForm input[type=text], .searchForm input[type=date] {
     flex: 17;
     text-align: center;
 }
@@ -329,6 +329,108 @@ label{
 
 .memberDropdown {
     text-align: center;
+}
+
+#viewJobs .table-responsive, #viewJobs form {
+    width: 95%;
+}
+
+#viewJobs form {
+    margin: 0 auto 2em auto;
+    text-align: center;
+}
+
+.table {
+    width: 250%;
+}
+
+.table-dark {
+    background-color: #364F6B;
+}
+
+table.table-bordered {
+    border: 1px solid #43DDE6 !important;
+}
+
+table.table-bordered > thead > tr > th{
+    border: 1px solid #43DDE6 !important;
+}
+
+table.table-bordered > tbody > tr > td:not(.job) {
+    border: 1px solid #43DDE6 !important;
+}
+
+.job {
+    position: relative;
+    background-color: #43DDE6;
+    color: #364F6B;
+    font-weight: 500;
+    transition: transform 200ms ease-in-out, background-color 200ms ease-in-out;
+}
+
+.job:hover {
+    cursor: pointer;
+    transform: scale(1.025);
+    background-color: #3dccd4;
+}
+
+.job+.job, .job+.job:hover {
+    border-left: 1px solid #364F6B !important;
+}
+
+.job~.job, .job~.job:hover {
+    border-right: 1px solid #364F6B !important;
+}
+
+.job a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#viewJobs #costContainer, #viewJobs #revenueContainer, #viewJobs #teamContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#viewJobs #startTimeContainer, #viewJobs #endTimeContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+#viewJobs #costContainer {
+    margin-right: 10%;
+}
+
+#viewJobs #teamContainer {
+    max-width: 30%;
+}
+
+#viewJobs .descriptionContainer {
+    margin-bottom: 1.5em;
+}
+
+#viewJobs #taskContainer {
+     margin-right: 20%;
+}
+
+#viewJobs .modal li {
+    font-size: 1.75em;
+    font-weight: 500;
+}
+
+#teamMemberContainer, #taskContainer {
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
 }
 
 @media only screen and (max-width: 992px) {
