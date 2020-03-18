@@ -37,6 +37,10 @@
         <servlet-name>EmployeesController</servlet-name>
         <url-pattern>/deleteEmployee</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeesController</servlet-name>
+        <url-pattern>/addEmployeeSkills/*</url-pattern>
+    </servlet-mapping>
     
     <!-- Setting Up Tasks Controller -->
     <servlet>
