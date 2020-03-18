@@ -54,9 +54,4 @@ public class TeamService implements ITeamService {
     public ITeam getTeam(int id) {
         return repo.getTeam(id);
     }
-
-    @Override
-    public List<IJob> getJobs(int teamID) {
-        return repo.getJobs(teamID);
-    }
 }

@@ -90,5 +90,19 @@ public class CommonController extends HttpServlet {
             return null;
         }
     }
+    
+    protected Date getDateWithoutTime(HttpServletRequest request, String key) {
+        try {
+            Date date = new Date();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+            date = df.parse(request.getParameter(key));
+
+            return date;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 
 }

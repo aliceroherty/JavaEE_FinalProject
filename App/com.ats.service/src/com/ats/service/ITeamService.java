@@ -22,5 +22,4 @@ public interface ITeamService {
     List<ITeam> getTeams();
     List<IEmployee> getTeamMembers(int teamID);
     ITeam getTeam(int id);
-    List<IJob> getJobs(int teamID);
 }

@@ -16,6 +16,7 @@ public interface IJobService {
     int updateJob(IJob job);
     int deleteJob(int id);
     List<IJob> getJobs();
+    List<IJob> getTeamJobs(int teamID);
     void addError(IJob job, String message);
     boolean isValid(IJob job);
     double calculateCost(IJob job);

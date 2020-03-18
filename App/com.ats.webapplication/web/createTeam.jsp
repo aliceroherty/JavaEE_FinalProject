@@ -20,8 +20,7 @@
                     Select 1st Team Member
                 </option>
                 <c:forEach var="employee" items="${vm.employees}">
-                    <option value="${employee.getId()}">${employee.getFullName()}
-                    </option>
+                    <option value="${employee.getId()}">${employee.getFirstName()} ${employee.getLastName()}</option>
                 </c:forEach>  
             </select>
             <select class="form-control" name="member2">
@@ -29,8 +28,7 @@
                     Select 2nd Team Member
                 </option>
                 <c:forEach var="employee" items="${vm.employees}">
-                    <option value="${employee.getId()}">${employee.getFullName()}
-                    </option>
+                    <option value="${employee.getId()}">${employee.getFirstName()} ${employee.getLastName()}</option>
                 </c:forEach>    
             </select>
             <div class="form-check">

@@ -12,9 +12,12 @@ import com.ats.service.ServiceFactory;
 import com.ats.viewmodels.CreateJobViewModel;
 import com.ats.viewmodels.JobListViewModel;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,15 +29,15 @@ import javax.servlet.http.HttpServletResponse;
  * @date 12-03-2020
  */
 public class JobsController extends CommonController {
-    IJobService service = ServiceFactory.createJobInstance();
-    ITaskService taskService = ServiceFactory.createTaskInstance();
-    ITeamService teamService = ServiceFactory.createTeamInstance();
-
     private final String CREATE_JOB = "/createJob.jsp";
     private final String JOBS = "/jobs.jsp";
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IJobService service = ServiceFactory.createJobInstance();
+        ITaskService taskService = ServiceFactory.createTaskInstance();
+        ITeamService teamService = ServiceFactory.createTeamInstance();
+    
         String path = request.getRequestURI();
 
         if (path != null) {
@@ -51,20 +54,27 @@ public class JobsController extends CommonController {
                     break;
                 case "jobs":
                     JobListViewModel jobListViewModel = new JobListViewModel();
-                    jobListViewModel.setJobs(service.getJobs());
+                    jobListViewModel.setJobs(searchJobs(new Date()));
+                    jobListViewModel.setTeams(getJobTeams(jobListViewModel.getJobs()));
                     request.setAttribute("vm", jobListViewModel);
+                    
+                    if (jobListViewModel.getJobs().isEmpty()) {
+                        request.setAttribute("message", "There are no jobs scheduled for today.");
+                    }
+                    
                     super.setView(request, JOBS);
                     break;
             }
 
             super.getView().forward(request, response);
         }
-
-        super.getView().forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IJobService service = ServiceFactory.createJobInstance();
+        ITaskService taskService = ServiceFactory.createTaskInstance();
+        ITeamService teamService = ServiceFactory.createTeamInstance();
         try {
             String path = request.getRequestURI();
 
@@ -92,6 +102,27 @@ public class JobsController extends CommonController {
                         
                         super.setView(request, CREATE_JOB);
                         break;
+                    case "jobs":
+                        JobListViewModel jobListViewModel = new JobListViewModel();
+                        
+                        Date searchDate = super.getDateWithoutTime(request, "search");
+                        
+                        if (searchDate == null) {
+                            searchDate = new Date();
+                        }
+                        
+                        jobListViewModel.setJobs(searchJobs(searchDate));
+                        jobListViewModel.setTeams(getJobTeams(jobListViewModel.getJobs()));
+                        request.setAttribute("vm", jobListViewModel);
+                        
+                        if (jobListViewModel.getJobs().isEmpty()) {
+                            SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMMM dd yyyy");
+                            String searchDateString = format.format(searchDate);
+                            request.setAttribute("message", String.format("There are no jobs scheduled for %s.", searchDateString));
+                        }
+                        
+                        super.setView(request, JOBS);
+                    break;
                 }
 
                 super.getView().forward(request, response);
@@ -102,6 +133,10 @@ public class JobsController extends CommonController {
     }
 
     private IJob setJob(HttpServletRequest request) {
+        IJobService service = ServiceFactory.createJobInstance();
+        ITaskService taskService = ServiceFactory.createTaskInstance();
+        ITeamService teamService = ServiceFactory.createTeamInstance();
+    
         String description = super.getValue(request, "description");
         String clientName = super.getValue(request, "clientName");
         Date startTime = super.getDate(request, "startTime");
@@ -153,5 +188,36 @@ public class JobsController extends CommonController {
         job.setRevenue(revenue);
         
         return job;
+    }
+    
+    private List<ITeam> getJobTeams(List<IJob> jobs) {
+        List<ITeam> teams = new ArrayList<>();
+        
+        for (IJob job : jobs) {
+            if (teams.stream().filter(t -> t.getId() == job.getTeam().getId()).collect(Collectors.toList()).isEmpty()) {
+                teams.add(job.getTeam());
+            } 
+        }
+        
+        return teams;
+    }
+    
+    private List<IJob> searchJobs(Date date) {
+        IJobService service = ServiceFactory.createJobInstance();
+        List<IJob> jobs = JobFactory.createListInstance();
+                        
+        for (IJob j : service.getJobs()) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            int searchDateDay = c.get(Calendar.DAY_OF_YEAR);
+            c.setTime(j.getStartTime());
+            int jobDateDay = c.get(Calendar.DAY_OF_YEAR);
+
+            if (searchDateDay == jobDateDay) {
+                jobs.add(j);
+            }
+        }
+        
+        return jobs;
     }
 }
