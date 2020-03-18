@@ -107,7 +107,7 @@ public class TeamController extends CommonController {
         IEmployeeService employeeService = ServiceFactory.createEmployeeInstance();
         
         String name = super.getValue(request, "name");
-        boolean isOnCall = super.getBoolean(request, "onCall");
+        boolean isOnCall = request.getParameter("onCall") != null;
         Date createdAt = new Date();
         Date updatedAt = null;
         boolean isDeleted = false;
