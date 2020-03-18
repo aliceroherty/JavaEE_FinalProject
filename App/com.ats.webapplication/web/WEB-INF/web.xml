@@ -72,4 +72,8 @@
         <servlet-name>JobsController</servlet-name>
         <url-pattern>/createJob</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobsController</servlet-name>
+        <url-pattern>/jobs</url-pattern>
+    </servlet-mapping>
 </web-app>

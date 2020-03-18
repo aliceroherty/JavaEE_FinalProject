@@ -1,7 +1,9 @@
 USE ats;
 
-TRUNCATE employeetasks;
-TRUNCATE teammembers;
+DELETE FROM employeetasks;
+DELETE FROM teammembers;
+DELETE FROM jobtasks;
+DELETE FROM jobs;
 DELETE FROM employees;
 DELETE FROM tasks;
 DELETE FROM teams;
@@ -11,14 +13,16 @@ CALL Team_Insert(@teamID, "Team 1", 0, SYSDATE(), NULL, 0, NULL);
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("John", "Doe", 123456789, 15.25, false, sysdate(), NULL, NULL);
-
-CALL TeamMember_Insert(LAST_INSERT_ID(), @teamID);
+SET @JohnDoeID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@teamID, @JohnDoeID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Jane", "Doe", 987654321, 17.25, false, sysdate(), NULL, NULL);
 
-CALL TeamMember_Insert(LAST_INSERT_ID(), @teamID);
+SET @JaneDoeID = LAST_INSERT_ID();
+
+CALL TeamMember_Insert(@teamID, @JaneDoeID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
@@ -68,13 +72,22 @@ INSERT INTO tasks
 (Name, Description, Duration)
 VALUES ("Test Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
 
+INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JohnDoeID);
+INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDoeID);
+
 INSERT INTO tasks 
 (Name, Description, Duration)
 VALUES ("Test Task 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
 
+INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JohnDoeID);
+INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDoeID);
+
 INSERT INTO tasks 
 (Name, Description, Duration)
 VALUES ("Test Task 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
+
+INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JohnDoeID);
+INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDoeID);
 
 INSERT INTO tasks 
 (Name, Description, Duration)

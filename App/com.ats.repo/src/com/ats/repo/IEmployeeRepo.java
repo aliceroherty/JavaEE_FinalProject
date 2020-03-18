@@ -1,6 +1,7 @@
 package com.ats.repo;
 
 import com.ats.models.IEmployee;
+import com.ats.models.ITask;
 import java.util.List;
 
 /**
@@ -15,4 +16,5 @@ public interface IEmployeeRepo {
     List<IEmployee> getEmployees();
     IEmployee getEmployee(int id);
     int getNumberOfTeams(int id);
+    List<ITask> getSkills(int employeeID);
 }

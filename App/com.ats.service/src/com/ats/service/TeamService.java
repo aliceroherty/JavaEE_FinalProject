@@ -6,6 +6,7 @@
 package com.ats.service;
 
 import com.ats.models.IEmployee;
+import com.ats.models.IJob;
 import com.ats.models.ITeam;
 import com.ats.repo.ITeamRepo;
 import com.ats.repo.RepoFactory;
@@ -47,5 +48,15 @@ public class TeamService implements ITeamService {
     @Override
     public List<IEmployee> getTeamMembers(int teamID) {
         return repo.getTeamMembers(teamID);
+    }
+
+    @Override
+    public ITeam getTeam(int id) {
+        return repo.getTeam(id);
+    }
+
+    @Override
+    public List<IJob> getJobs(int teamID) {
+        return repo.getJobs(teamID);
     }
 }

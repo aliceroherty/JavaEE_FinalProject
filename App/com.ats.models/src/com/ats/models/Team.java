@@ -67,7 +67,7 @@ public class Team extends Base implements ITeam {
         this.name = name;
     }
 
-    public boolean isIsOnCall() {
+    public boolean isOnCall() {
         return isOnCall;
     }
 
@@ -91,7 +91,7 @@ public class Team extends Base implements ITeam {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isIsDeleted() {
+    public boolean isDeleted() {
         return isDeleted;
     }
 

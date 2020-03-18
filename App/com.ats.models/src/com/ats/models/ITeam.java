@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ITeam extends IBase {
     
-     public int getId();
+    public int getId();
 
     public void setId(int id);
 
@@ -23,7 +23,7 @@ public interface ITeam extends IBase {
     
     public void setName(String name);
 
-    public boolean isIsOnCall();
+    public boolean isOnCall();
 
     public void setIsOnCall(boolean isOnCall);
 
@@ -35,7 +35,7 @@ public interface ITeam extends IBase {
 
     public void setUpdatedAt(Date updatedAt);
 
-    public boolean isIsDeleted();
+    public boolean isDeleted();
 
     public void setIsDeleted(boolean isDeleted);
 

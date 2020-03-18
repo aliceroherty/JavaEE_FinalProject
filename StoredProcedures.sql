@@ -123,6 +123,23 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `Employee_GetSkills`;
+
+DELIMITER $$
+CREATE PROCEDURE `Employee_GetSkills`(IN EmployeeID INT)
+BEGIN
+	SELECT 
+		tasks.ID,
+        tasks.Name,
+        tasks.Description,
+        tasks.Duration
+    FROM 
+		employeetasks 
+	INNER JOIN tasks 
+		ON employeetasks.TaskID = tasks.ID AND employeetasks.EmployeeID = EmployeeID;
+END$$
+
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `Employee_Delete`;
 
 DELIMITER $$
@@ -175,6 +192,15 @@ DELIMITER $$
 CREATE PROCEDURE `Tasks_GetTasks`()
 BEGIN
 	SELECT * FROM tasks;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Tasks_GetTask`;
+
+DELIMITER $$
+CREATE PROCEDURE `Tasks_GetTask`(IN TaskID INT)
+BEGIN
+	SELECT * FROM tasks WHERE ID = TaskID;
 END$$
 
 DELIMITER ;
@@ -243,6 +269,32 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `Jobs_GetTasks`;
+
+DELIMITER $$
+CREATE PROCEDURE `Jobs_GetTasks`(IN JobID INT)
+BEGIN
+	SELECT 
+		tasks.ID,
+        tasks.Name,
+        tasks.Description,
+        tasks.Duration
+    FROM 
+		jobtasks 
+	INNER JOIN tasks 
+		ON jobtasks.TaskID = tasks.ID AND jobtasks.JobID = JobID;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Jobs_GetAll`;
+
+DELIMITER $$
+CREATE PROCEDURE `Jobs_GetAll`()
+BEGIN
+	SELECT * FROM jobs;
+END$$
+
+DELIMITER ;
 
 DROP procedure IF EXISTS `ats`.`TeamMember_Insert`;
 
@@ -290,4 +342,22 @@ DELIMITER $$
 CREATE PROCEDURE `Team_GetAll`()
 BEGIN
 	SELECT * FROM teams;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_GetByID`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_GetByID`(IN TeamID INT)
+BEGIN
+	SELECT * FROM teams WHERE ID = TeamID;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_GetJobs`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_GetJobs`(IN ID INT)
+BEGIN
+	SELECT * FROM jobs WHERE TeamID = ID;
 END$$

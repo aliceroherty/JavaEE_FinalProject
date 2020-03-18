@@ -54,6 +54,12 @@
     box-shadow: 0 0 0 0.2rem rgba(67, 221, 230, .25);
 }
 
+.alert-danger {
+    background-color: #FC5185;
+    border-color: #f26893;
+    color: #692338;
+}
+
 body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/com.ats.webapplication/assets/images/background.svg");
     background-attachment: fixed;
@@ -87,6 +93,10 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.alert {
+    width: 80%;
 }
 
 #createTask form {
