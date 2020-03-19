@@ -27,11 +27,7 @@
             <div class="form-group">
                 <label for="skills">Skills</label>
                 <select name="skills" size="5" multiple class="form-control text-center">
-                    <c:if test="${vm != null && vm.getSkills().size() > 0}">
-                        <c:forEach items="${vm.getSkills()}" var="skill">
-                            <option value="${skill.getId()}"><c:out value="${skill.getName()}"/></option>
-                        </c:forEach>
-                    </c:if>
+        
                 </select>
             </div>
             
