@@ -55,8 +55,7 @@ public class EmployeesController extends CommonController {
                     request.setAttribute("tlvm", tlvm);
 
                     super.setView(request, ADD_EMPLOYEESKILLS);
-
-                    super.getView().forward(request, response);
+                    break;
             }
         }
 
