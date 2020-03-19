@@ -49,7 +49,7 @@ public class JobService implements IJobService {
         } else if (isDuringBusinessHours(job) && !teamMeetsRequirements(job)) {
             addError(job, "Team doesn't have the required skills for the job.");
         }
-        
+
         if (job.getStartTime() != null && job.getTeam() != null && teamIsBooked(job)) {
             addError(job, "Team is already booked for this time.");
         }
@@ -64,14 +64,19 @@ public class JobService implements IJobService {
 
     @Override
     public int deleteJob(int id) {
-        return repo.deleteJob(id);
+        if (id != 0) {
+            return repo.deleteJob(id);
+
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public List<IJob> getJobs() {
         return repo.getJobs();
     }
-    
+
     @Override
     public List<IJob> getTeamJobs(int teamID) {
         return repo.getTeamJobs(teamID);
@@ -127,17 +132,17 @@ public class JobService implements IJobService {
     public boolean teamMeetsRequirements(IJob job) {
         List<IEmployee> team = job.getTeam().getEmployees();
         boolean meetsRequirements = true;
-        
+
         for (IEmployee employee : team) {
             List<ITask> skills = employee.getSkills();
-            
+
             for (ITask skill : job.getTasks()) {
                 if (skills.stream().filter(s -> s.getId() == skill.getId()).toArray().length == 0) {
                     meetsRequirements = false;
                 }
             }
         }
-        
+
         return meetsRequirements;
     }
 

@@ -383,6 +383,17 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP procedure IF EXISTS `Job_Delete`;
+
+DELIMITER $$
+CREATE PROCEDURE `Job_Delete`(
+IN JobID INT
+)
+BEGIN
+	DELETE FROM `ats`.`jobs` WHERE (`ID` = JobID);
+END$$
+
+DELIMITER ;
 
 DROP procedure IF EXISTS `ats`.`TeamMember_Insert`;
 

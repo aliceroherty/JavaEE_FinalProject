@@ -49,7 +49,7 @@ public class JobRepo extends BaseRepo implements IJobRepo {
                     int taskId = task.getId();
                     jobTaskParams.add(ParameterFactory.createInstance(taskId));
                     jobTaskParams.add(ParameterFactory.createInstance(id));
-                    
+
                     db.executeNonQuery("CALL JobTasks_Insert(?, ?);", jobTaskParams);
                 }
             }
@@ -67,35 +67,51 @@ public class JobRepo extends BaseRepo implements IJobRepo {
 
     @Override
     public int deleteJob(int id) {
-        return 0;
+        int rowsAffected = 0;
+
+        List<Object> returnValues;
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+
+        params.add(ParameterFactory.createInstance(id));
+
+        returnValues = db.executeNonQuery("CALL Job_Delete(?)", params);
+        
+        try {
+            rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return rowsAffected;
     }
 
     @Override
     public List<IJob> getJobs() {
         List<IJob> jobs = JobFactory.createListInstance();
-        
+
         CachedRowSet results = db.executeFill("CALL Jobs_GetAll();", ParameterFactory.createListInstance());
 
         try {
             while (results.next()) {
                 IJob job = JobFactory.createInstance(
-                    getInt("ID", results),
-                    getString("Description", results),
-                    getString("ClientName", results),
-                    getDouble("Cost", results),
-                    getDouble("Revenue", results),
-                    getDate("StartTime", results),
-                    getDate("EndTime", results),
-                    getTasks(getInt("ID", results)),
-                    teamRepo.getTeam(getInt("TeamID", results))
+                        getInt("ID", results),
+                        getString("Description", results),
+                        getString("ClientName", results),
+                        getDouble("Cost", results),
+                        getDouble("Revenue", results),
+                        getDate("StartTime", results),
+                        getDate("EndTime", results),
+                        getTasks(getInt("ID", results)),
+                        teamRepo.getTeam(getInt("TeamID", results))
                 );
-                
+
                 jobs.add(job);
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         return jobs;
     }
 
@@ -111,12 +127,12 @@ public class JobRepo extends BaseRepo implements IJobRepo {
         try {
             while (results.next()) {
                 ITask task = TaskFactory.createInstance(
-                    getInt("ID", results),
-                    getString("Name", results),
-                    getString("Description", results),
-                    getInt("Duration", results)
+                        getInt("ID", results),
+                        getString("Name", results),
+                        getString("Description", results),
+                        getInt("Duration", results)
                 );
-                
+
                 tasks.add(task);
             }
         } catch (Exception ex) {
@@ -125,7 +141,7 @@ public class JobRepo extends BaseRepo implements IJobRepo {
 
         return tasks;
     }
-    
+
     @Override
     public List<IJob> getTeamJobs(int teamID) {
         List<IJob> jobs = JobFactory.createListInstance();
@@ -138,17 +154,17 @@ public class JobRepo extends BaseRepo implements IJobRepo {
         try {
             while (results.next()) {
                 IJob job = JobFactory.createInstance(
-                    getInt("ID", results),
-                    getString("Description", results),
-                    getString("ClientName", results),
-                    getDouble("Cost", results),
-                    getDouble("Revenue", results),
-                    getDate("StartTime", results),
-                    getDate("EndTime", results),
-                    getTasks(getInt("ID", results)),
-                    teamRepo.getTeam(teamID)
+                        getInt("ID", results),
+                        getString("Description", results),
+                        getString("ClientName", results),
+                        getDouble("Cost", results),
+                        getDouble("Revenue", results),
+                        getDate("StartTime", results),
+                        getDate("EndTime", results),
+                        getTasks(getInt("ID", results)),
+                        teamRepo.getTeam(teamID)
                 );
-                
+
                 jobs.add(job);
             }
         } catch (Exception ex) {
