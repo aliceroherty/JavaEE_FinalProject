@@ -5,6 +5,7 @@ import com.ats.models.IEmployee;
 import com.ats.service.IEmployeeService;
 import com.ats.service.ITaskService;
 import com.ats.service.ServiceFactory;
+import com.ats.viewmodels.EditTaskViewModel;
 import com.ats.viewmodels.EmployeeListViewModel;
 import com.ats.viewmodels.TaskListViewModel;
 import java.io.IOException;
@@ -21,19 +22,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class EmployeesController extends CommonController {
 
-    private IEmployeeService service = ServiceFactory.createEmployeeInstance();
-
     private static final String EMPLOYEES = "/employees.jsp";
     private static final String CREATE_EMPLOYEE = "/createEmployee.jsp";
-    private static final String ADD_EMPLOYEESKILLS = "/addEmployeeSkils.jsp";
+    private static final String EMPLOYEESKILLS = "/employeeSkills.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getRequestURI();
 
+        IEmployeeService service = ServiceFactory.createEmployeeInstance();
+        ITaskService taskService = ServiceFactory.createTaskInstance();
+
         if (path != null) {
             String[] pathParts = path.split("/");
-            String action = pathParts[(pathParts.length - 1)];
+            String action = pathParts[2];
 
             switch (action) {
                 case "employees":
@@ -47,14 +49,17 @@ public class EmployeesController extends CommonController {
                 case "createEmployee":
                     super.setView(request, CREATE_EMPLOYEE);
                     break;
-                case "addEmployeeSkills":
-                    TaskListViewModel tlvm = new TaskListViewModel();
-                    ITaskService taskService = ServiceFactory.createTaskInstance();
+                case "employeeSkills":
+                    EditTaskViewModel etvm = new EditTaskViewModel();
 
-                    tlvm.setTasks(taskService.getTasks());
-                    request.setAttribute("tlvm", tlvm);
+                    int id = getInteger(request, "id");
+                    
+                    etvm.setTasks(taskService.getTasks());
 
-                    super.setView(request, ADD_EMPLOYEESKILLS);
+
+                    request.setAttribute("vm", etvm);
+
+                    super.setView(request, EMPLOYEESKILLS);
                     break;
             }
         }
@@ -64,6 +69,7 @@ public class EmployeesController extends CommonController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IEmployeeService service = ServiceFactory.createEmployeeInstance();
         try {
             String path = request.getRequestURI();
 
@@ -115,7 +121,7 @@ public class EmployeesController extends CommonController {
                         System.out.println(rowsAffected);
                         break;
                 }
-                
+
                 if (super.getView() != null) {
                     super.getView().forward(request, response);
                 }

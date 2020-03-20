@@ -39,7 +39,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EmployeesController</servlet-name>
-        <url-pattern>/addEmployeeSkills/*</url-pattern>
+        <url-pattern>/employeeSkills</url-pattern>
     </servlet-mapping>
     
     <!-- Setting Up Tasks Controller -->
