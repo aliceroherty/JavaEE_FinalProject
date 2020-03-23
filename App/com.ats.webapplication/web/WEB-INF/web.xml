@@ -56,16 +56,18 @@
         <url-pattern>/deleteTask</url-pattern>
     </servlet-mapping>
 
-
-
     <!-- Setting up Team controller-->
     <servlet>
-        <servlet-name>TeamController</servlet-name>
+        <servlet-name>TeamsController</servlet-name>
         <servlet-class>com.ats.controllers.TeamController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TeamController</servlet-name>
+        <servlet-name>TeamsController</servlet-name>
         <url-pattern>/createTeam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeamsController</servlet-name>
+        <url-pattern>/teams</url-pattern>
     </servlet-mapping>
     
     <!-- Setting up Jobs Controller -->

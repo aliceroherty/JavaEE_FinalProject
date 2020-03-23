@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ats.models.EmployeeFactory;
+import com.ats.viewmodels.TeamListViewModel;
 
 /**
  *
@@ -33,6 +34,7 @@ public class TeamController extends CommonController {
     private ITeamService service = ServiceFactory.createTeamInstance();
 
     private static final String CREATE_TEAM = "/createTeam.jsp";
+    private static final String TEAMS = "/teams.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,20 +45,20 @@ public class TeamController extends CommonController {
             String[] pathParts = path.split("/");
             String action = pathParts[(pathParts.length - 1)];
             
-            
-            CreateTeamViewModel vm = new CreateTeamViewModel();
-            vm.setEmployee(getEmployees());
-            request.setAttribute("vm", vm);
-            
-            
+            switch (action) {
+                case "createTeam":
+                    CreateTeamViewModel vm = new CreateTeamViewModel();
+                    vm.setEmployee(getEmployees());
+                    request.setAttribute("vm", vm);
+                    super.setView(request, CREATE_TEAM);
+                    break;
+                case "teams":
+                    TeamListViewModel tlvm = new TeamListViewModel(service.getTeams());
+                    request.setAttribute("vm", tlvm);
+                    super.setView(request, TEAMS);
+                    break;
+            }
         }
-        else
-        {
-            service.getTeams();
-        }
-        
-        
-        super.setView(request, CREATE_TEAM);
 
         super.getView().forward(request, response);
 

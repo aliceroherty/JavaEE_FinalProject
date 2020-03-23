@@ -33,6 +33,7 @@
                     Teams
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="teams">View Teams</a>
                     <a class="dropdown-item" href="createTeam">Create Team</a>
                 </div>
             </li>

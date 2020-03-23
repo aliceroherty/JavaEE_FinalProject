@@ -478,29 +478,47 @@ SET @JaneDoeID = LAST_INSERT_ID();
 
 CALL TeamMember_Insert(@teamID, @JaneDoeID);
 
+CALL Team_Insert(@team2ID, "Team 2", 0, SYSDATE(), NULL, 0, NULL);
+
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Bob", "Doe", 453654787, 13.25, false, sysdate(), NULL, NULL);
+SET @BobDoeID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team2ID, @BobDoeID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Jim", "Morrison", 989764234, 17.50, false, sysdate(), NULL, NULL);
+SET @JimMorrisonID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team2ID, @JimMorrisonID);
+
+CALL Team_Insert(@team3ID, "Team 3", 0, SYSDATE(), NULL, 0, NULL);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Neil", "Young", 187637054, 14.75, false, sysdate(), NULL, NULL);
+SET @NeilYoungID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team3ID, @NeilYoungID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Maynard", "Keenan", 655275435, 18.35, false, sysdate(), NULL, NULL);
+SET @MaynardID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team3ID, @MaynardID);
+
+CALL Team_Insert(@team4ID, "Team 4", 0, SYSDATE(), NULL, 0, NULL);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("James", "Chancellor", 657442835, 16.65, false, sysdate(), NULL, NULL);
+SET @JamesChancellorID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team4ID, @JamesChancellorID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Danny", "Carey", 543785090, 17.65, false, sysdate(), NULL, NULL);
+SET @DannyCareyID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team4ID, @DannyCareyID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
@@ -548,19 +566,3 @@ INSERT INTO tasks
 VALUES ("Test Task 4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
 
 CALL Employee_GetAll();
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
