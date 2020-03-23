@@ -9,3 +9,9 @@ function deleteTask(id) {
         location.reload(true);
     });
 }
+
+function deleteJob(id) {
+    $.post(`deleteJob`, {id}, (data) => {
+        location.reload(true);
+    });
+}

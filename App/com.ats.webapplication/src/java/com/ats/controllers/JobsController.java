@@ -123,6 +123,15 @@ public class JobsController extends CommonController {
                         
                         super.setView(request, JOBS);
                     break;
+                    case "deleteJob":
+                        int id = getInteger(request, "id");
+                        int rowsAffected = 0;
+                        if (id != 0) {
+                            rowsAffected = service.deleteJob(id);
+                        }
+                        
+                        System.out.println(rowsAffected);
+                    break;
                 }
 
                 super.getView().forward(request, response);

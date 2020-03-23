@@ -37,6 +37,10 @@
         <servlet-name>EmployeesController</servlet-name>
         <url-pattern>/deleteEmployee</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeesController</servlet-name>
+        <url-pattern>/employeeSkills</url-pattern>
+    </servlet-mapping>
     
     <!-- Setting Up Tasks Controller -->
     <servlet>
@@ -82,5 +86,9 @@
     <servlet-mapping>
         <servlet-name>JobsController</servlet-name>
         <url-pattern>/jobs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobsController</servlet-name>
+        <url-pattern>/deleteJob</url-pattern>
     </servlet-mapping>
 </web-app>

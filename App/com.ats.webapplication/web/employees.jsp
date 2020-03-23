@@ -101,7 +101,8 @@
                             </c:if>
                             <div class="modal-footer">	
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
-                                <button type="button" class="btn btn-primary">Update</button>	
+                                <button type="button" class="btn btn-primary">Update</button>
+                                <a class="btn btn-primary" href="employeeSkills?id=${employee.getId()}">Add Skills</a>	
                                 <button type="button" class="btn btn-danger" onclick="deleteEmployee(${employee.getId()})">Delete</button>	
                             </div>
                         </div>

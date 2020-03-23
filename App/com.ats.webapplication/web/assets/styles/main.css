@@ -93,11 +93,16 @@ h2 {
 }
 
 #createEmployee form {
-    width: 80%;
+    width: 100%;
     height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+.editEmpSkills {
+    display: flex;
+    width: 100%;
+    height: 60%;
 }
 
 .alert {
@@ -436,7 +441,7 @@ table.table-bordered > tbody > tr > td:not(.job) {
 }
 
 #viewJobs #taskContainer {
-     margin-right: 20%;
+    margin-right: 20%;
 }
 
 #viewJobs .modal li {

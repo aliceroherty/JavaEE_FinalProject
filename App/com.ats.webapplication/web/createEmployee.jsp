@@ -29,6 +29,5 @@
         <c:if test="${message != null}">
             <h2><c:out value="${message}"/></h2>
         </c:if>
-        
     </body>
 </html>

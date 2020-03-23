@@ -144,7 +144,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary">Update</button>
-                                <button type="button" class="btn btn-danger" onclick="deleteTask(${task.getId()})">Delete</button>
+                                <button type="button" class="btn btn-danger" onclick="deleteJob(${job.getId()})">Delete</button>
                             </div>
                         </div>
                     </div>
