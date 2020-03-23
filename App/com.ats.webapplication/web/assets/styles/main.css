@@ -444,15 +444,31 @@ table.table-bordered > tbody > tr > td:not(.job) {
     margin-right: 20%;
 }
 
-#viewJobs .modal li {
+.modal li {
     font-size: 1.75em;
     font-weight: 500;
 }
 
-#teamMemberContainer, #taskContainer {
+.teamMemberContainer, #taskContainer {
     max-width: 40%;
     display: flex;
     flex-direction: column;
+}
+
+#isOnCallContainer {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dateContainer {
+    min-width: 65%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.descriptionContainer #updatedAtContainer {
+    margin-bottom: 1.5em;
 }
 
 @media only screen and (max-width: 992px) {

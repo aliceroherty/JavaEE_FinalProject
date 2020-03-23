@@ -517,7 +517,7 @@ VALUES ("Maynard", "Keenan", 655275435, 18.35, false, sysdate(), NULL, NULL);
 SET @MaynardID = LAST_INSERT_ID();
 CALL TeamMember_Insert(@team3ID, @MaynardID);
 
-CALL Team_Insert(@team4ID, "Team 4", 0, SYSDATE(), NULL, 0, NULL);
+CALL Team_Insert(@team4ID, "Team 4", 1, SYSDATE(), SYSDATE(), 1, SYSDATE());
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
