@@ -13,9 +13,27 @@ import java.util.List;
  * @author soake
  */
 public class EditTaskViewModel {
+
     private List<ITask> tasks;
-    private ITask task;
-    
+    private List<ITask> empTasks;
+    private int empID;
+
+    public int getEmpID() {
+        return empID;
+    }
+
+    public void setEmpID(int empID) {
+        this.empID = empID;
+    }
+
+    public List<ITask> getEmpTasks() {
+        return empTasks;
+    }
+
+    public void setEmpTasks(List<ITask> empTasks) {
+        this.empTasks = empTasks;
+    }
+
     public List<ITask> getTasks() {
         return tasks;
     }
@@ -23,14 +41,5 @@ public class EditTaskViewModel {
     public void setTasks(List<ITask> tasks) {
         this.tasks = tasks;
     }
-
-    public ITask getTask() {
-        return task;
-    }
-
-    public void setTask(ITask task) {
-        this.task = task;
-    }
-
 
 }

@@ -3,6 +3,7 @@ package com.ats.controllers;
 import com.ats.models.IEmployee;
 import com.ats.models.ITask;
 import com.ats.models.TaskFactory;
+import com.ats.service.IEmployeeService;
 import com.ats.service.ITaskService;
 import com.ats.service.ServiceFactory;
 import com.ats.viewmodels.EmployeeListViewModel;
@@ -31,7 +32,7 @@ public class TasksController extends CommonController {
 
         if (path != null) {
             String[] pathParts = path.split("/");
-            String action = pathParts[(pathParts.length - 1)];
+            String action = pathParts[2];
 
             switch (action) {
                 case "tasks":
@@ -83,14 +84,35 @@ public class TasksController extends CommonController {
                         if (id != 0) {
                             rowsAffected = service.deleteTask(id);
                         }
-
+                        response.getWriter().print(rowsAffected);
                         System.out.println(rowsAffected);
                         break;
+                    case "deleteEmpTask":{
 
+                        int empId = getInteger(request, "empID");
+                        int taskId = getInteger(request, "taskID");
+
+                        service.deleteEmpTask(empId, taskId);
+                    }
+                        break;
+
+                    case "insertEmpTask":{
+                        IEmployeeService empService = ServiceFactory.createEmployeeInstance();
+                        
+                        int empId = getInteger(request, "empID");
+                        int taskId = getInteger(request, "taskID");
+                        
+                        empService.insertEmployeeTask(taskId, empId);                        
+                        
+                    }
+                        break;
                 }
+                if (!"deleteTask".equals(action)) {
+                    super.getView().forward(request, response);
+                }
+
             }
 
-            super.getView().forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

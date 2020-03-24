@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface IEmployeeService {
     int insertEmployee(IEmployee employee);
+    int insertEmployeeTask(int TaskID,int EmpID);
     int updateEmployee(IEmployee employee);
     int deleteEmployee(int id);
     List<IEmployee> getEmployees();

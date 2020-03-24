@@ -59,8 +59,14 @@
         <servlet-name>TasksController</servlet-name>
         <url-pattern>/deleteTask</url-pattern>
     </servlet-mapping>
-
-
+    <servlet-mapping>
+        <servlet-name>TasksController</servlet-name>
+        <url-pattern>/deleteEmpTask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TasksController</servlet-name>
+        <url-pattern>/insertEmpTask</url-pattern>
+    </servlet-mapping>
 
     <!-- Setting up Team controller-->
     <servlet>

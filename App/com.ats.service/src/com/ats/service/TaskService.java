@@ -35,6 +35,17 @@ public class TaskService implements ITaskService {
     }
 
     @Override
+    public int deleteEmpTask(int empId, int taskId) {
+
+        return repo.deleteEmpTask(empId, taskId);
+    }
+
+    @Override
+    public List<ITask> getEmployeeTasks(int id) {
+        return repo.getEmployeeTasks(id);
+    }
+
+    @Override
     public List<ITask> getTasks() {
         return repo.getTasks();
     }

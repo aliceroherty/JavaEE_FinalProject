@@ -41,6 +41,11 @@ public class EmployeeService implements IEmployeeService {
         
         return isValid(employee) ? repo.insertEmployee(employee) : 0;        
     }
+    
+    @Override
+    public int insertEmployeeTask(int TaskID,int EmpID){
+        return repo.insertEmployeeTask(TaskID, EmpID);
+    }
 
     @Override
     public int updateEmployee(IEmployee employee) {

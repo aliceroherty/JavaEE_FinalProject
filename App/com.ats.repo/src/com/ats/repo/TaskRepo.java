@@ -53,6 +53,28 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
     }
 
     @Override
+    public int deleteEmpTask(int empId, int taskId) {
+        int rowsAffected = 0;
+
+        List<Object> returnValues;
+        List<IParameter> params = ParameterFactory.createListInstance();
+
+        params.add(ParameterFactory.createInstance(empId, IParameter.Direction.IN, Types.INTEGER));
+        params.add(ParameterFactory.createInstance(taskId, IParameter.Direction.IN, Types.INTEGER));
+
+        System.out.println(empId + " " + taskId);
+        returnValues = db.executeNonQuery("CALL EmployeeTask_Delete(?,?)", params);
+
+        try {
+            rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return rowsAffected;
+    }
+
+    @Override
     public int updateTask(ITask task) {
         return 0;
     }
@@ -72,6 +94,7 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
             rowsAffected = Integer.parseInt(returnValues.get(0).toString());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            return -1;
         }
 
         return rowsAffected;
@@ -100,6 +123,7 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
                 tasks.add(task);
             }
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
 
         return tasks;
@@ -130,9 +154,43 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
                 );
             }
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
 
         return task;
+    }
+
+    /**
+     * Get Task by selected empID
+     *
+     * @param ID of chosen employee
+     * @return List of tasks Retrieved
+     */
+    @Override
+    public List<ITask> getEmployeeTasks(int id) {
+        List<ITask> tasks = TaskFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(id, Direction.IN, Types.INTEGER));
+
+        CachedRowSet results = db.executeFill("CALL Tasks_GetEmployeeTasks(?);", params);
+
+        try {
+            while (results.next()) {
+                ITask task = TaskFactory.createInstance();
+
+                task.setId(getInt("ID", results));
+                task.setName(getString("Name", results));
+                task.setDescription(getString("Description", results));
+                task.setDuration(getInt("Duration", results));
+
+                tasks.add(task);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return tasks;
     }
 
 }

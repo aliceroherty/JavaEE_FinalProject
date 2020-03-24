@@ -14,4 +14,6 @@ public interface ITaskRepo {
     int deleteTask(int id);
     List<ITask> getTasks();
     ITask getTask(int id);
+    List<ITask> getEmployeeTasks(int empId);
+    int deleteEmpTask(int empId, int taskId);
 }

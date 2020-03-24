@@ -17,4 +17,5 @@ public interface IEmployeeRepo {
     IEmployee getEmployee(int id);
     int getNumberOfTeams(int id);
     List<ITask> getSkills(int employeeID);
+    public int insertEmployeeTask(int TaskID, int EmpID);
 }

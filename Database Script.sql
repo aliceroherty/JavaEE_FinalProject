@@ -72,6 +72,21 @@ CREATE TABLE `ats`.`teammembers` (
     REFERENCES `ats`.`teams` (`ID`));
 
 DELIMITER ;
+
+USE `ats`;
+DROP procedure IF EXISTS `ats`.`EmployeeTask_Delete`;
+
+DELIMITER $$
+USE `ats`$$
+CREATE PROCEDURE `EmployeeTask_Delete`(
+IN EmployeeID INT,
+IN TaskID INT
+)
+BEGIN
+	DELETE FROM `employeetasks` WHERE `TaskID` = TaskID AND `EmployeeID` = EmployeeID;
+END$$
+
+DELIMITER ;
 	
 USE `ats`;
 
@@ -90,6 +105,18 @@ INSERT INTO `ats`.`tasks`
 (`ID`, `Name`, `Description`, `Duration`)
 VALUES
 (TaskID, Name, Description, Duration);
+END$$
+
+USE `ats`;
+DROP procedure IF EXISTS `Tasks_GetEmployeeTasks`;
+
+DELIMITER $$
+USE `ats`$$
+CREATE PROCEDURE `Tasks_GetEmployeeTasks` (
+IN EmpID INT
+)
+BEGIN
+SELECT tasks.* FROM tasks INNER JOIN employeetasks ON employeetasks.EmployeeID = EmpID AND tasks.ID = employeetasks.TaskID;
 END$$
 
 DELIMITER ;

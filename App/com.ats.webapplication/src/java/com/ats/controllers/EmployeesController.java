@@ -40,7 +40,7 @@ public class EmployeesController extends CommonController {
             switch (action) {
                 case "employees":
                     EmployeeListViewModel vm = new EmployeeListViewModel();
-
+                    System.out.println(action);
                     vm.setEmployees(service.getEmployees());
 
                     request.setAttribute("vm", vm);
@@ -53,9 +53,10 @@ public class EmployeesController extends CommonController {
                     EditTaskViewModel etvm = new EditTaskViewModel();
 
                     int id = getInteger(request, "id");
-                    
-                    etvm.setTasks(taskService.getTasks());
 
+                    etvm.setTasks(taskService.getTasks());
+                    etvm.setEmpTasks(taskService.getEmployeeTasks(id));
+                    etvm.setEmpID(id);
 
                     request.setAttribute("vm", etvm);
 
@@ -72,11 +73,12 @@ public class EmployeesController extends CommonController {
         IEmployeeService service = ServiceFactory.createEmployeeInstance();
         try {
             String path = request.getRequestURI();
-
+            System.out.println(path);
             if (path != null) {
                 String[] pathParts = path.split("/");
-                String action = pathParts[(pathParts.length - 1)];
-
+                String action = pathParts[2];
+                System.out.println(action);
+                
                 switch (action) {
                     case "employees":
                         EmployeeListViewModel vm = new EmployeeListViewModel();
@@ -119,6 +121,14 @@ public class EmployeesController extends CommonController {
                         }
 
                         System.out.println(rowsAffected);
+                        break;
+                    case "deleteEmpTask":
+                        ITaskService taskService = ServiceFactory.createTaskInstance();
+                        int empId = getInteger(request, "empID");
+                        int taskId = getInteger(request, "taskID");
+                        
+                        taskService.deleteEmpTask(empId, taskId);
+
                         break;
                 }
 

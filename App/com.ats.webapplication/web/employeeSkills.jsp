@@ -24,23 +24,31 @@
             <h2 class="text-center mt-3"><c:out value="${message}"/></h2>
         </c:if>
         <div class="editEmpSkills">
-        <form method="POST" class="mx-auto mt-4 mb-5">
+            <form method="POST" class="mx-auto mt-4 mb-5">
                 <div class="form-group editEmpSkills">
-                    <label for="skills">Employee Skills</label>
-                    <select name="skills" size="5" multiple id="skills" class="form-control text-center">
-
+                    <label for="empSkills">Employee Skills</label>
+                    <select name="empSkills" size="5" multiple id="skills" class="form-control text-center">
+                        <c:if test="${vm != null && vm.getEmpTasks().size() > 0}">
+                            <c:forEach items="${vm.getEmpTasks()}" var="skill">
+                                <option value="${skill.getId()}"><c:out value="${skill.getName()}"/></option>
+                            </c:forEach>
+                        </c:if>
                     </select>
                 </div>
 
                 <div class="form-group editEmpSkills">
-                    <label for="empSkills">Available Skills</label>
-                    <select name="empSkills" size="5" multiple id="empSkills" class="form-control text-center">
-
+                    <label for="skills">Available Skills</label>
+                    <select name="skills" size="5" multiple id="empSkills" class="form-control text-center">
+                        <c:if test="${vm != null && vm.getTasks().size() > 0}">
+                            <c:forEach items="${vm.getTasks()}" var="skill">
+                                <option value="${skill.getId()}"><c:out value="${skill.getName()}"/></option>
+                            </c:forEach>
+                        </c:if>
                     </select>
                 </div>
-            <button type="submit" class="btn btn-primary submitButton mt-2">Add Skills</button>
-            <button type="submit" class="btn btn-primary submitButton mt-2">Remove Skills</button>
-        </form>
+                <button type="button" onclick="" class="btn btn-primary submitButton mt-2">Add Skills</button>
+                <button type="button" onclick="deleteEmpTask(${vm.getEmpID()})" class="btn btn-primary submitButton mt-2">Remove Skills</button>
+            </form>
         </div>
     </body>
 </html>
