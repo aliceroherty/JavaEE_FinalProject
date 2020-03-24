@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="topContainer">
-                                    <div id="teamMemberContainer">
+                                    <div class="teamMemberContainer">
                                         <h3 class="title">Team Members:</h3>
                                         <ul>
                                             <c:forEach var="employee" items="${job.getTeam().getEmployees()}">

@@ -87,6 +87,11 @@ h1 {
     margin-bottom: 2.5%;
 }
 
+h2 {
+    color: #364F6B;
+    text-align: center;
+}
+
 #createEmployee form {
     width: 100%;
     height: 60%;
@@ -202,6 +207,12 @@ label{
     flex-wrap: wrap;
     margin: 0 5%;
 }
+ 
+.teamContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 5%;
+}
 
 .taskContainer a {
     width: 32%;
@@ -209,27 +220,33 @@ label{
     margin-right: 2%;
 }
 
-.taskContainer a:nth-child(3n + 3) {
+.teamContainer a {
+    width: 32%;
+    height: 30vh;
+    margin-right: 2%;
+}
+
+.taskContainer a:nth-child(3n + 3), .teamContainer a:nth-child(3n + 3) {
     margin-right: 0 !important;
     margin-bottom: 1em;
 }
 
-.taskContainer a:last-child {
+.taskContainer a:last-child, .teamContainer a:last-child {
     margin-bottom: 1em;
 }
 
-.taskContainer .card {
+.taskContainer .card, .teamContainer .card {
     transition: transform 200ms ease-in-out;
     border: none;
     height: 100%;
 }
 
-.taskContainer .card:hover {
+.taskContainer .card:hover, .teamContainer .card:hover {
     transform: scale(1.025);
     cursor: pointer;
 }
 
-.taskContainer .card .card-body {
+.taskContainer .card .card-body, .teamContainer .card .card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -427,15 +444,31 @@ table.table-bordered > tbody > tr > td:not(.job) {
     margin-right: 20%;
 }
 
-#viewJobs .modal li {
+.modal li {
     font-size: 1.75em;
     font-weight: 500;
 }
 
-#teamMemberContainer, #taskContainer {
+.teamMemberContainer, #taskContainer {
     max-width: 40%;
     display: flex;
     flex-direction: column;
+}
+
+#isOnCallContainer {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dateContainer {
+    min-width: 65%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.descriptionContainer #updatedAtContainer {
+    margin-bottom: 1.5em;
 }
 
 @media only screen and (max-width: 992px) {

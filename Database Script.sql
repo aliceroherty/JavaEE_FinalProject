@@ -480,6 +480,44 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_Delete`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_Delete`(IN TeamsID INT)
+BEGIN
+	DELETE FROM teammembers WHERE TeamID = TeamsID;
+	DELETE FROM teams WHERE ID = TeamsID;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_Update`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_Update`
+(
+	IN TeamID INT,
+	IN Name VARCHAR(50),
+	IN IsOnCall BOOLEAN,
+	IN CreatedAt DATETIME,
+	IN UpdatedAt DATETIME,
+	IN isDeleted BOOLEAN,
+	IN DeletedAt Datetime
+)
+BEGIN
+	UPDATE 
+		teams
+	SET
+		Name = Name,
+        IsOnCall = IsOnCall,
+        CreatedAt = CreatedAt,
+        UpdatedAt = UpdatedAt,
+        IsDeleted = isDeleted,
+        DeletedAt = DeletedAt
+	WHERE
+		ID = TeamID;
+END$$
+
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `Team_GetJobs`;
 
 DELIMITER $$
@@ -516,29 +554,47 @@ SET @JaneDoeID = LAST_INSERT_ID();
 
 CALL TeamMember_Insert(@teamID, @JaneDoeID);
 
+CALL Team_Insert(@team2ID, "Team 2", 0, SYSDATE(), NULL, 0, NULL);
+
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Bob", "Doe", 453654787, 13.25, false, sysdate(), NULL, NULL);
+SET @BobDoeID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team2ID, @BobDoeID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Jim", "Morrison", 989764234, 17.50, false, sysdate(), NULL, NULL);
+SET @JimMorrisonID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team2ID, @JimMorrisonID);
+
+CALL Team_Insert(@team3ID, "Team 3", 0, SYSDATE(), NULL, 0, NULL);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Neil", "Young", 187637054, 14.75, false, sysdate(), NULL, NULL);
+SET @NeilYoungID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team3ID, @NeilYoungID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Maynard", "Keenan", 655275435, 18.35, false, sysdate(), NULL, NULL);
+SET @MaynardID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team3ID, @MaynardID);
+
+CALL Team_Insert(@team4ID, "Team 4", 1, SYSDATE(), SYSDATE(), 1, SYSDATE());
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("James", "Chancellor", 657442835, 16.65, false, sysdate(), NULL, NULL);
+SET @JamesChancellorID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team4ID, @JamesChancellorID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
 VALUES ("Danny", "Carey", 543785090, 17.65, false, sysdate(), NULL, NULL);
+SET @DannyCareyID = LAST_INSERT_ID();
+CALL TeamMember_Insert(@team4ID, @DannyCareyID);
 
 INSERT INTO employees 
 (FirstName, LastName, SIN, HourlyRate, isDeleted, CreatedAt, UpdatedAt, DeletedAt) 
@@ -570,7 +626,7 @@ INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDo
 INSERT INTO tasks 
 (Name, Description, Duration)
 VALUES ("Test Task 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
-
+SET @task2ID = LAST_INSERT_ID();
 INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JohnDoeID);
 INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDoeID);
 
@@ -584,21 +640,25 @@ INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDo
 INSERT INTO tasks 
 (Name, Description, Duration)
 VALUES ("Test Task 4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
+/*OUT JobID INT,
+    IN Description VARCHAR(255),
+    IN ClientName VARCHAR(50),
+    IN Cost DECIMAL(19, 2),
+    IN Revenue DECIMAL(19, 2),
+    IN StartTime DATETIME,
+    IN EndTime DATETIME,
+    IN TeamID INT*/
+CALL Jobs_Insert(
+	@jobID, 
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.",
+	"Client Name",
+    200,
+    600,
+    sysdate(),
+    DATE_ADD(sysdate(), INTERVAL 1.5 HOUR),
+    @teamID
+);
+
+CALL JobTasks_Insert(@task2ID, last_insert_id());
 
 CALL Employee_GetAll();
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
