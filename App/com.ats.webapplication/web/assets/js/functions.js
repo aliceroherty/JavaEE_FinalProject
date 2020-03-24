@@ -15,3 +15,9 @@ function deleteJob(id) {
         location.reload(true);
     });
 }
+
+function deleteTeam(id) {
+    $.post(`deleteTeam`, {id}, (data) => {
+        location.reload(true);
+    });
+}

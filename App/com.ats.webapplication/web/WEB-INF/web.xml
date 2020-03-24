@@ -73,6 +73,10 @@
         <servlet-name>TeamsController</servlet-name>
         <url-pattern>/teams</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeamsController</servlet-name>
+        <url-pattern>/deleteTeam</url-pattern>
+    </servlet-mapping>
     
     <!-- Setting up Jobs Controller -->
     <servlet>

@@ -453,6 +453,44 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_Delete`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_Delete`(IN TeamsID INT)
+BEGIN
+	DELETE FROM teammembers WHERE TeamID = TeamsID;
+	DELETE FROM teams WHERE ID = TeamsID;
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `Team_Update`;
+
+DELIMITER $$
+CREATE PROCEDURE `Team_Update`
+(
+	IN TeamID INT,
+	IN Name VARCHAR(50),
+	IN IsOnCall BOOLEAN,
+	IN CreatedAt DATETIME,
+	IN UpdatedAt DATETIME,
+	IN isDeleted BOOLEAN,
+	IN DeletedAt Datetime
+)
+BEGIN
+	UPDATE 
+		teams
+	SET
+		Name = Name,
+        IsOnCall = IsOnCall,
+        CreatedAt = CreatedAt,
+        UpdatedAt = UpdatedAt,
+        IsDeleted = isDeleted,
+        DeletedAt = DeletedAt
+	WHERE
+		ID = TeamID;
+END$$
+
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `Team_GetJobs`;
 
 DELIMITER $$
@@ -561,7 +599,7 @@ INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDo
 INSERT INTO tasks 
 (Name, Description, Duration)
 VALUES ("Test Task 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
-
+SET @task2ID = LAST_INSERT_ID();
 INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JohnDoeID);
 INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDoeID);
 
@@ -575,5 +613,25 @@ INSERT INTO employeetasks (TaskID, EmployeeID) VALUES (LAST_INSERT_ID(), @JaneDo
 INSERT INTO tasks 
 (Name, Description, Duration)
 VALUES ("Test Task 4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.", 30);
+/*OUT JobID INT,
+    IN Description VARCHAR(255),
+    IN ClientName VARCHAR(50),
+    IN Cost DECIMAL(19, 2),
+    IN Revenue DECIMAL(19, 2),
+    IN StartTime DATETIME,
+    IN EndTime DATETIME,
+    IN TeamID INT*/
+CALL Jobs_Insert(
+	@jobID, 
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent leo purus, euismod a rhoncus ultricies, condimentum quis tortor. Integer scelerisque ac justo non sollicitudin. Sed finibus nulla sit amet cursus varius.",
+	"Client Name",
+    200,
+    600,
+    sysdate(),
+    DATE_ADD(sysdate(), INTERVAL 1.5 HOUR),
+    @teamID
+);
+
+CALL JobTasks_Insert(@task2ID, last_insert_id());
 
 CALL Employee_GetAll();

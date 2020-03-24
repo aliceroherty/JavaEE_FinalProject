@@ -89,6 +89,13 @@ public class TeamController extends CommonController {
 
                         super.setView(request, CREATE_TEAM);
                         break;
+                    case "deleteTeam":
+                        int id = getInteger(request, "id");
+                        int rowsAffected = 0;
+                        if (id != 0) {
+                            rowsAffected = service.deleteTeam(id);
+                        }
+                        break;
                 }
             }
         } catch (Exception e) {

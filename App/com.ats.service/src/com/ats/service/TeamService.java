@@ -10,6 +10,7 @@ import com.ats.models.IJob;
 import com.ats.models.ITeam;
 import com.ats.repo.ITeamRepo;
 import com.ats.repo.RepoFactory;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,7 +33,14 @@ public class TeamService implements ITeamService {
 
     @Override
     public int deleteTeam(int id) {
-        return repo.deleteTeam(id);
+        if (repo.getJobs(id).isEmpty()) {
+            return repo.deleteTeam(id);
+        } else {
+            ITeam team = getTeam(id);
+            team.setDeletedAt(new Date());
+            team.setIsDeleted(true);
+            return repo.updateTeam(team);
+        }
     }
 
     @Override

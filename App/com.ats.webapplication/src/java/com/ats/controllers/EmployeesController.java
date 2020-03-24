@@ -117,8 +117,6 @@ public class EmployeesController extends CommonController {
                         if (id != 0) {
                             rowsAffected = service.deleteEmployee(id);
                         }
-
-                        System.out.println(rowsAffected);
                         break;
                 }
 

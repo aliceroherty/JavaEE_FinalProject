@@ -12,8 +12,10 @@ import com.ats.dataaccess.ParameterFactory;
 import com.ats.models.EmployeeFactory;
 import com.ats.models.IEmployee;
 import com.ats.models.IJob;
+import com.ats.models.ITask;
 import com.ats.models.ITeam;
 import com.ats.models.JobFactory;
+import com.ats.models.TaskFactory;
 import com.ats.models.TeamFactory;
 import java.sql.ResultSetMetaData;
 import java.sql.Types;
@@ -90,12 +92,50 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
 
     @Override
     public int updateTeam(ITeam team) {
-        return 0;
+        int rowsAffected = 0;
+        List<Object> returnValues;
+        List<IParameter> params = ParameterFactory.createListInstance();
+        
+        params.add(ParameterFactory.createInstance(team.getId()));
+        params.add(ParameterFactory.createInstance(team.getName()));
+        params.add(ParameterFactory.createInstance(team.isOnCall()));
+        params.add(ParameterFactory.createInstance(team.getCreatedAt()));
+        params.add(ParameterFactory.createInstance(team.getUpdatedAt()));
+        params.add(ParameterFactory.createInstance(team.isDeleted()));
+        params.add(ParameterFactory.createInstance(team.getDeletedAt()));
+        
+        returnValues = db.executeNonQuery("CALL Team_Update(?, ?, ?, ?, ?, ?, ?);", params);
+        
+        try {
+            if (returnValues != null) {
+                rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return rowsAffected;
     }
 
     @Override
     public int deleteTeam(int id) {
-        return 0;
+        int rowsAffected = 0;
+
+        List<Object> returnValues;
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+
+        params.add(ParameterFactory.createInstance(id));
+
+        returnValues = db.executeNonQuery("CALL Team_Delete(?);", params);
+        
+        try {
+            rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return rowsAffected;
     }
 
     @Override
@@ -184,5 +224,64 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         }
         
         return team;
+    }
+    
+    @Override
+    public List<IJob> getJobs(int id) {
+        List<IJob> jobs = JobFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(id));
+
+        CachedRowSet results = db.executeFill("CALL Team_GetJobs(?);", params);
+
+        try {
+            while (results.next()) {
+                IJob job = JobFactory.createInstance(
+                        getInt("ID", results),
+                        getString("Description", results),
+                        getString("ClientName", results),
+                        getDouble("Cost", results),
+                        getDouble("Revenue", results),
+                        getDate("StartTime", results),
+                        getDate("EndTime", results),
+                        getTasks(getInt("ID", results)),
+                        getTeam(id)
+                );
+
+                jobs.add(job);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return jobs;
+    }
+    
+    @Override
+    public List<ITask> getTasks(int jobID) {
+        List<ITask> tasks = TaskFactory.createListInstance();
+
+        List<IParameter> params = ParameterFactory.createListInstance();
+        params.add(ParameterFactory.createInstance(jobID));
+
+        CachedRowSet results = db.executeFill("CALL Jobs_GetTasks(?);", params);
+
+        try {
+            while (results.next()) {
+                ITask task = TaskFactory.createInstance(
+                        getInt("ID", results),
+                        getString("Name", results),
+                        getString("Description", results),
+                        getInt("Duration", results)
+                );
+
+                tasks.add(task);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return tasks;
     }
 }
