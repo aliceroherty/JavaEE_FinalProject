@@ -3,7 +3,6 @@ function deleteEmployee(id) {
         location.reload(true);
     });
 }
-
 function deleteTask(id) {
 
     $.post(`deleteTask`, {id}, (data) => {
