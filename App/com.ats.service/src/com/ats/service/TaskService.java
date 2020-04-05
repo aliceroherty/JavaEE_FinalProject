@@ -1,5 +1,6 @@
 package com.ats.service;
 
+import com.ats.models.ErrorFactory;
 import com.ats.models.ITask;
 import com.ats.repo.ITaskRepo;
 import com.ats.repo.RepoFactory;
@@ -22,7 +23,16 @@ public class TaskService implements ITaskService {
 
     @Override
     public int updateTask(ITask task) {
-        return repo.updateTask(task);
+        
+        if (task.getId() == 0) {
+            task.addError(ErrorFactory.createInstance(0, "ID required for Save"));
+            return 0;
+        } else if(!isValid(task)) {
+            task.addError(ErrorFactory.createInstance(11, "Invalid Task Save"));
+            return 0;
+        } else {
+            return repo.updateTask(task);
+        }       
     }
 
     @Override

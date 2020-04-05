@@ -56,7 +56,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Update</button>
+                                <a class="btn btn-primary" href="createTask?id=${task.getId()}">Update</a>	
                                 <button type="button" class="btn btn-danger" onclick="deleteTask(${task.getId()})">Delete</button>
                             </div>
                         </div>

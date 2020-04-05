@@ -106,6 +106,20 @@ public class TasksController extends CommonController {
                         
                     }
                         break;
+                    case "editTask":{
+                        id = getInteger(request, "id");
+                        
+                        task = setTask(request);
+                        task.setId(id);
+                        
+                        service.updateTask(task);
+                        
+                        if (service.isValid(task)) {
+                            request.setAttribute("errors", task.getErrors());
+                        }
+                    
+                    }
+                        break;
                 }
                 if (!"deleteTask".equals(action)) {
                     super.getView().forward(request, response);

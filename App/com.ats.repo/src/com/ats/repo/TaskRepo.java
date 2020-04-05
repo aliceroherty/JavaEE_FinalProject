@@ -76,7 +76,27 @@ public class TaskRepo extends BaseRepo implements ITaskRepo {
 
     @Override
     public int updateTask(ITask task) {
-        return 0;
+        int rowsAffected = 0;
+        
+        List<Object> returnValues;
+        List<IParameter> params = ParameterFactory.createListInstance();
+        
+        params.add(ParameterFactory.createInstance(task.getId()));
+        params.add(ParameterFactory.createInstance(task.getName()));
+        params.add(ParameterFactory.createInstance(task.getDescription()));
+        params.add(ParameterFactory.createInstance(task.getDuration()));
+        
+        returnValues = db.executeNonQuery("STORED PROC", params);
+        
+        try {
+            if (returnValues != null) {
+                rowsAffected = Integer.parseInt(returnValues.get(0).toString());
+            }
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        
+        return rowsAffected;
     }
 
     @Override
