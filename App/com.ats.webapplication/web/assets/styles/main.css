@@ -67,10 +67,6 @@ body {
     color: #F0F0F0;
 }
 
-nav img {
-    width: 30%;
-}
-
 nav {
     background-color: #43DDE6;
 }
@@ -78,6 +74,16 @@ nav {
 nav .nav-link {
     font-size: 1.25em;
     font-weight: 500;
+    color: #364F6B;
+    text-align: center;
+}
+
+.navbar-brand {
+    max-width: 25%;
+    max-height: 100%;
+}
+
+.fa-bars {
     color: #364F6B;
 }
 
@@ -88,13 +94,13 @@ h1 {
 }
 
 h2 {
-    color: #364F6B;
+    color: #fff;
     text-align: center;
 }
 
 #createEmployee form {
-    width: 100%;
-    height: 60%;
+    width: 80%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -207,7 +213,7 @@ label{
     flex-wrap: wrap;
     margin: 0 5%;
 }
- 
+
 .teamContainer {
     display: flex;
     flex-wrap: wrap;
@@ -224,6 +230,10 @@ label{
     width: 32%;
     height: 30vh;
     margin-right: 2%;
+}
+
+.teamContainer h2 {
+    color: #364F6B;
 }
 
 .taskContainer a:nth-child(3n + 3), .teamContainer a:nth-child(3n + 3) {
@@ -471,6 +481,10 @@ table.table-bordered > tbody > tr > td:not(.job) {
     margin-bottom: 1.5em;
 }
 
+nav img {
+    width: 50%;
+}
+
 @media only screen and (max-width: 992px) {
     .employeeContainer a {
         width: 100%;
@@ -486,5 +500,78 @@ table.table-bordered > tbody > tr > td:not(.job) {
 
     .employeeContainer a:last-child {
         margin-bottom: 1em;
+    }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1300px) {    
+    .taskContainer a, .teamContainer a {
+        width: 49%;
+        height: 60vh;
+        margin-right: 2%;
+        margin-bottom: 2%;
+    }
+
+    .taskContainer a:nth-child(3n + 3), .teamContainer a:nth-child(3n + 3) {
+        margin-right: 2% !important;
+        margin-bottom: 2%;
+    }
+
+    .taskContainer a:nth-child(2n + 2), .teamContainer a:nth-child(2n + 2) {
+        margin-right: 0 !important;
+        margin-bottom: 2%;
+    }
+
+    .taskContainer a:last-child, .teamContainer a:last-child {
+        margin-bottom: 2%;
+    }
+}
+
+@media only screen and (max-width: 900px) {    
+    .taskContainer a, .teamContainer a {
+        width: 100%;
+        height: 60vh;
+        margin-right: 2%;
+        margin-bottom: 2%;
+    }
+
+    .taskContainer a:nth-child(3n + 3), .teamContainer a:nth-child(3n + 3) {
+        margin-right: 0 !important;
+        margin-bottom: 2%;
+    }
+
+    .taskContainer a:last-child, .teamContainer a:last-child {
+        margin-bottom: 2%;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 900px) {    
+    nav img {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 700px) {    
+    nav img {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 650px) {    
+    nav img {
+        width: 80%;
+    }
+    
+    .navbar-brand {
+        max-width: 30%;
+    }
+}
+
+@media only screen and (max-width: 500px) {    
+    nav img {
+        width: 100%;
+    }
+    
+    .navbar-brand {
+        max-width: 35%;
     }
 }

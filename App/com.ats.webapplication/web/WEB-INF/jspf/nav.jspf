@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="home"><img src="${pageContext.request.contextPath}/assets/images/logo.png"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class="fas fa-bars fa-2x"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
@@ -25,7 +25,6 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/tasks">View Tasks</a>
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/createTask">Create Task</a>
-
                 </div>
             </li>
             <li class="nav-item dropdown">

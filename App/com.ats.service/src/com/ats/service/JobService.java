@@ -44,10 +44,14 @@ public class JobService implements IJobService {
 
         if (job.getTeam() == null) {
             addError(job, "Team is required.");
-        } else if (!isDuringBusinessHours(job) && !job.getTeam().isOnCall()) {
-            addError(job, "Bookings can only be created for the on call team outside of business hours.");
-        } else if (isDuringBusinessHours(job) && !teamMeetsRequirements(job)) {
-            addError(job, "Team doesn't have the required skills for the job.");
+        } else if (job.getStartTime() != null && job.getEndTime() != null) {
+            if (!isDuringBusinessHours(job) && !job.getTeam().isOnCall()) {
+                addError(job, "Bookings can only be created for the on call team outside of business hours.");
+            }
+        } else if (job.getStartTime() != null && job.getEndTime() != null) {
+            if (isDuringBusinessHours(job) && !teamMeetsRequirements(job)) {
+                addError(job, "Team doesn't have the required skills for the job.");
+            }
         }
 
         if (job.getStartTime() != null && job.getTeam() != null && teamIsBooked(job)) {
@@ -110,7 +114,11 @@ public class JobService implements IJobService {
 
     @Override
     public double calculateRevenue(IJob job) {
-        return isDuringBusinessHours(job) ? calculateCost(job) * 3 : calculateCost(job) * 4;
+        if (job.getStartTime() != null && job.getEndTime() != null) {
+            return isDuringBusinessHours(job) ? calculateCost(job) * 3 : calculateCost(job) * 4;
+        }
+
+        return 0;
     }
 
     @Override

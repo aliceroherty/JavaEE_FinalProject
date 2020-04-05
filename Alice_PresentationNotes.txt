@@ -1,0 +1,15 @@
+List Tasks (Rezise Browser)
+Show Task
+
+Create Employee
+Show Employees (Resize Browser)
+Search Employees
+Deleting Employees
+
+Show Teams (Resize Browser)
+Show Team Information
+Deleting Teams
+
+Creating a Job
+View Jobs
+Show Job
