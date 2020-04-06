@@ -7,7 +7,7 @@ function deleteTask(id) {
 
     $.post(`deleteTask`, {id}, (data) => {
         console.log(data);
-        
+
         if (data === "-1") {
             alert("Cannot Delete, Task in use.");
         } else {
@@ -23,8 +23,17 @@ function deleteJob(id) {
     });
 }
 
-function insertEmpTask(taskID, empID){
-    
+function insertEmpTask(taskID, empID) {
+    let empSkills = document.getElementById('empSkills');
+    let url = window.location.href;
+    empID = url.charAt(url.length-1)
+    if (empSkills.selectedIndex !== -1) {
+        
+        taskID = empSkills.selectedOptions[0].value;
+        $.post(`insertEmpTask`, {taskID: taskID, empID: empID}, (data) => {
+            location.reload(true);
+        });
+    }
 }
 
 function deleteEmpTask(empID) {
@@ -34,7 +43,8 @@ function deleteEmpTask(empID) {
         $.post(`deleteEmpTask`, {taskID: taskID, empID: empID}, (data) => {
             location.reload(true);
         });
-    }}
+    }
+}
 function deleteTeam(id) {
     $.post(`deleteTeam`, {id}, (data) => {
         location.reload(true);

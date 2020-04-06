@@ -20,4 +20,5 @@ public interface ITeamRepo {
     ITeam getTeam(int id);
     List<IJob> getJobs(int id);
     List<ITask> getTasks(int jobID);
+    boolean doesExist_TeamOnCall();
 }

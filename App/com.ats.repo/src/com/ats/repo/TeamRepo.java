@@ -41,6 +41,15 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
      * @return The number of rows affected.
      */
     @Override
+    public boolean doesExist_TeamOnCall() {
+
+        CachedRowSet results = db.executeFill("CALL Team_IsOnCall();", null);
+
+        return results.size() != 0;
+
+    }
+
+    @Override
     public int insertTeam(ITeam team) {
         int id = 0;
         List<Object> returnParams;
@@ -71,16 +80,15 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
 
         try {
             if (returnParams != null && !returnParams.isEmpty()) {
-              
-                id = Integer.parseInt(returnParams.get(0).toString());              
-               
-                
-                for(IEmployee employee : team.getEmployees()){
+
+                id = Integer.parseInt(returnParams.get(0).toString());
+
+                for (IEmployee employee : team.getEmployees()) {
                     List<IParameter> teamMemberParams = ParameterFactory.createListInstance();
-                    
+
                     teamMemberParams.add(ParameterFactory.createInstance(employee.getId()));
                     teamMemberParams.add(ParameterFactory.createInstance(id));
-                    
+
                     db.executeNonQuery("CALL TeamMember_Insert(?, ?);", teamMemberParams);
                 }
             }
@@ -95,7 +103,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         int rowsAffected = 0;
         List<Object> returnValues;
         List<IParameter> params = ParameterFactory.createListInstance();
-        
+
         params.add(ParameterFactory.createInstance(team.getId()));
         params.add(ParameterFactory.createInstance(team.getName()));
         params.add(ParameterFactory.createInstance(team.isOnCall()));
@@ -103,9 +111,9 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         params.add(ParameterFactory.createInstance(team.getUpdatedAt()));
         params.add(ParameterFactory.createInstance(team.isDeleted()));
         params.add(ParameterFactory.createInstance(team.getDeletedAt()));
-        
+
         returnValues = db.executeNonQuery("CALL Team_Update(?, ?, ?, ?, ?, ?, ?);", params);
-        
+
         try {
             if (returnValues != null) {
                 rowsAffected = Integer.parseInt(returnValues.get(0).toString());
@@ -113,7 +121,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return rowsAffected;
     }
 
@@ -128,7 +136,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         params.add(ParameterFactory.createInstance(id));
 
         returnValues = db.executeNonQuery("CALL Team_Delete(?);", params);
-        
+
         try {
             rowsAffected = Integer.parseInt(returnValues.get(0).toString());
         } catch (Exception ex) {
@@ -141,30 +149,30 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
     @Override
     public List<ITeam> getTeams() {
         List<ITeam> teams = TeamFactory.createListInstance();
-        
+
         CachedRowSet results = db.executeFill("CALL Team_GetAll();", ParameterFactory.createListInstance());
-        
+
         try {
             while (results.next()) {
                 ResultSetMetaData data = results.getMetaData();
-                
+
                 ITeam team = TeamFactory.createInstance(
-                    getInt("ID", results),
-                    getString("Name", results),
-                    getBoolean("IsOnCall", results),
-                    getDate("CreatedAt", results),
-                    getDate("UpdatedAt", results),
-                    getBoolean("IsDeleted", results),
-                    getDate("DeletedAt", results),
-                    getTeamMembers(getInt("ID", results))
+                        getInt("ID", results),
+                        getString("Name", results),
+                        getBoolean("IsOnCall", results),
+                        getDate("CreatedAt", results),
+                        getDate("UpdatedAt", results),
+                        getBoolean("IsDeleted", results),
+                        getDate("DeletedAt", results),
+                        getTeamMembers(getInt("ID", results))
                 );
-                
+
                 teams.add(team);
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         return teams;
     }
 
@@ -180,18 +188,18 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         try {
             while (results.next()) {
                 IEmployee employee = EmployeeFactory.createInstance(
-                    getInt("ID", results),
-                    getString("FirstName", results),
-                    getString("LastName", results),
-                    getInt("SIN", results),
-                    getDouble("HourlyRate", results),
-                    getDate("CreatedAt", results),
-                    getBoolean("isDeleted", results),
-                    getDate("UpdatedAt", results),
-                    getDate("DeletedAt", results),
-                    employeeRepo.getSkills(getInt("ID", results))
+                        getInt("ID", results),
+                        getString("FirstName", results),
+                        getString("LastName", results),
+                        getInt("SIN", results),
+                        getDouble("HourlyRate", results),
+                        getDate("CreatedAt", results),
+                        getBoolean("isDeleted", results),
+                        getDate("UpdatedAt", results),
+                        getDate("DeletedAt", results),
+                        employeeRepo.getSkills(getInt("ID", results))
                 );
-                
+
                 employees.add(employee);
             }
         } catch (Exception ex) {
@@ -207,9 +215,9 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         params.add(ParameterFactory.createInstance(id));
         CachedRowSet results = db.executeFill("CALL Team_GetByID(?);", params);
         ITeam team = TeamFactory.createInstance();
-        
+
         try {
-            if (results.next()) {                
+            if (results.next()) {
                 team.setId(getInt("ID", results));
                 team.setName(getString("Name", results));
                 team.setIsOnCall(getBoolean("IsOnCall", results));
@@ -222,10 +230,10 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         return team;
     }
-    
+
     @Override
     public List<IJob> getJobs(int id) {
         List<IJob> jobs = JobFactory.createListInstance();
@@ -257,7 +265,7 @@ public class TeamRepo extends BaseRepo implements ITeamRepo {
 
         return jobs;
     }
-    
+
     @Override
     public List<ITask> getTasks(int jobID) {
         List<ITask> tasks = TaskFactory.createListInstance();

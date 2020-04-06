@@ -41,6 +41,10 @@
         <servlet-name>EmployeesController</servlet-name>
         <url-pattern>/employeeSkills</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeesController</servlet-name>
+        <url-pattern>/insertEmpTask</url-pattern>
+    </servlet-mapping>
     
     <!-- Setting Up Tasks Controller -->
     <servlet>
@@ -63,11 +67,6 @@
         <servlet-name>TasksController</servlet-name>
         <url-pattern>/deleteEmpTask</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TasksController</servlet-name>
-        <url-pattern>/insertEmpTask</url-pattern>
-    </servlet-mapping>
-
     <!-- Setting up Team controller-->
     <servlet>
         <servlet-name>TeamsController</servlet-name>

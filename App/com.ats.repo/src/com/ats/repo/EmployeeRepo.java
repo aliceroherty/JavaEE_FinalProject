@@ -78,13 +78,13 @@ public class EmployeeRepo extends BaseRepo implements IEmployeeRepo {
         List<Object> returnParams;
         List<IParameter> params = ParameterFactory.createListInstance();
 
-        IParameter TaskIDParam = ParameterFactory.createInstance(TaskID, IParameter.Direction.OUT, Types.INTEGER);
+        IParameter TaskIDParam = ParameterFactory.createInstance(TaskID, IParameter.Direction.IN, Types.INTEGER);
         params.add(TaskIDParam);
 
-        IParameter EmpIDParam = ParameterFactory.createInstance(EmpID, IParameter.Direction.OUT, Types.INTEGER);
+        IParameter EmpIDParam = ParameterFactory.createInstance(EmpID, IParameter.Direction.IN, Types.INTEGER);
         params.add(EmpIDParam);
 
-        returnParams = db.executeNonQuery("CALL Employee_Insert(?, ?);", params);
+        returnParams = db.executeNonQuery("CALL EmployeeTask_Insert(?, ?);", params);
 
         try {
             if (returnParams != null && !returnParams.isEmpty()) {

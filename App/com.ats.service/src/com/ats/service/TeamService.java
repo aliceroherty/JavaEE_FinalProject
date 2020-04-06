@@ -6,7 +6,6 @@
 package com.ats.service;
 
 import com.ats.models.IEmployee;
-import com.ats.models.IJob;
 import com.ats.models.ITeam;
 import com.ats.repo.ITeamRepo;
 import com.ats.repo.RepoFactory;
@@ -23,6 +22,9 @@ public class TeamService implements ITeamService {
 
     @Override
     public int insertTeam(ITeam team) {
+        if (repo.doesExist_TeamOnCall()) {
+            return 0;
+        }
         return repo.insertTeam(team);
     }
 

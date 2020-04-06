@@ -78,7 +78,7 @@ public class EmployeesController extends CommonController {
                 String[] pathParts = path.split("/");
                 String action = pathParts[2];
                 System.out.println(action);
-                
+
                 switch (action) {
                     case "employees":
                         EmployeeListViewModel vm = new EmployeeListViewModel();
@@ -124,9 +124,16 @@ public class EmployeesController extends CommonController {
                         ITaskService taskService = ServiceFactory.createTaskInstance();
                         int empId = getInteger(request, "empID");
                         int taskId = getInteger(request, "taskID");
-                        
+
                         taskService.deleteEmpTask(empId, taskId);
 
+                        break;
+                    case "insertEmpTask":
+                        
+                        empId = getInteger(request, "empID");
+                        taskId = getInteger(request, "taskID");
+
+                        service.insertEmployeeTask(taskId, empId);
                         break;
                 }
 

@@ -46,7 +46,7 @@
                         </c:if>
                     </select>
                 </div>
-                <button type="button" onclick="" class="btn btn-primary submitButton mt-2">Add Skills</button>
+                <button type="button" onclick="insertEmpTask(${vm.getEmpID()})" class="btn btn-primary submitButton mt-2">Add Skills</button>
                 <button type="button" onclick="deleteEmpTask(${vm.getEmpID()})" class="btn btn-primary submitButton mt-2">Remove Skills</button>
             </form>
         </div>

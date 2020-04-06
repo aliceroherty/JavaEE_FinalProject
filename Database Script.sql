@@ -73,20 +73,39 @@ CREATE TABLE `ats`.`teammembers` (
 
 DELIMITER ;
 
+
+
+
 USE `ats`;
-DROP procedure IF EXISTS `ats`.`EmployeeTask_Delete`;
+DROP procedure IF EXISTS `EmployeeTask_Delete`;
 
 DELIMITER $$
 USE `ats`$$
-CREATE PROCEDURE `EmployeeTask_Delete`(
-IN EmployeeID INT,
-IN TaskID INT
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EmployeeTask_Delete`(
+IN ParamEmployeeID INT,
+IN ParamTaskID INT
 )
 BEGIN
-	DELETE FROM `employeetasks` WHERE `TaskID` = TaskID AND `EmployeeID` = EmployeeID;
-END$$
+	DELETE FROM `ats`.`employeetasks` WHERE (`TaskID` = ParamTaskID) AND (`EmployeeID` = ParamEmployeeID);
+ENd$$
 
 DELIMITER ;
+
+USE `ats`;
+DROP procedure IF EXISTS `EmployeeTask_Insert`;
+
+DELIMITER $$
+USE `ats`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EmployeeTask_Insert`(
+IN TaskID INT,
+IN EmpID INT
+)
+BEGIN
+INSERT INTO `ats`.`employeetasks` (`TaskID`, `EmployeeID`) VALUES (TaskID, EmpID);
+ENd$$
+
+DELIMITER ;
+
 	
 USE `ats`;
 
@@ -296,6 +315,18 @@ BEGIN
 	SELECT * FROM tasks;
 END$$
 
+DROP procedure IF EXISTS `Task_Delete`;
+
+DELIMITER $$
+USE `ats`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Task_Delete`(
+IN TaskID INT
+)
+BEGIN
+	DELETE FROM `ats`.`tasks` WHERE (`ID` = TaskID);
+ENd$$
+
+
 DELIMITER ;
 DROP PROCEDURE IF EXISTS `Tasks_GetTask`;
 
@@ -422,22 +453,32 @@ END$$
 
 DELIMITER ;
 
-DROP procedure IF EXISTS `ats`.`TeamMember_Insert`;
+USE `ats`;
+DROP procedure IF EXISTS `TeamMember_Insert`;
 
 DELIMITER $$
-
-CREATE PROCEDURE `TeamMember_Insert`(
-IN TeamID INT,
-IN EmployeeID INT
+USE `ats`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TeamMember_Insert`(
+IN TeamIDParam INT,
+IN EmployeeIDParam INT
 )
 BEGIN
 INSERT INTO `ats`.`teammembers`
 (`TeamID`, `EmployeeID`)
 VALUES
-(TeamID, EmployeeID);
-END$$
+(TeamIDParam, EmployeeIDParam);
+ENd$$
 
 DELIMITER ;
+
+DROP procedure IF EXISTS `Team_IsOnCall`;
+
+DELIMITER $$
+USE `ats`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Team_IsOnCall`()
+BEGIN
+	SELECT * FROM team WHERE isOnCall = 1 LIMIT 1;
+ENd$$
 
 DELIMITER ;
 DROP PROCEDURE IF EXISTS `Team_GetTeamMembers`;
